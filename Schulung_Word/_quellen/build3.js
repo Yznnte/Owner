@@ -9,7 +9,7 @@ const {
 const OUT = process.env.OUT || "/home/user/Owner/Schulung_Word";
 const IMG = process.env.IMG || path.join(__dirname, "bilder");
 const NAVY = "1F3A5F", ACCENT = "E07A1F", GREY = "5F6B7D", BLUEBG = "EEF3FB", ORGBG = "FFF4E8", LINE = "D5DDE8";
-const FONT = "Calibri";
+const FONT = "Arial";
 const M = 850;
 const W = 11906 - 2 * M;
 const WPX = Math.floor(W / 15);
@@ -261,7 +261,7 @@ await save("06_Teilnahmebescheinigung", [sec(null, [
   P([r("Name, Klasse", { size: 18, color: GREY })], { alignment: C, spacing: { after: 400 } }),
   P([r("am 17. November 2026 (09:15 – 10:45 Uhr) an der", { size: 26 })], { alignment: C }),
   P([r("Word-Schulung", { bold: true, color: NAVY, size: 52 })], { alignment: C, spacing: { before: 160, after: 60 } }),
-  P([r("Formate · Formatvorlagen · Kopf- und Fußzeile · Dokumentvorlagen", { color: GREY, size: 24 })], { alignment: C, spacing: { after: 200 } }),
+  P([r("Formate · Inhaltsverzeichnis · Kopf- und Fußzeile · Dokumentvorlagen", { color: GREY, size: 24 })], { alignment: C, spacing: { after: 200 } }),
   P([r("erfolgreich teilgenommen hat.", { size: 26 })], { alignment: C, spacing: { after: 400 } }),
   new Table({ width: { size: W, type: WidthType.DXA }, columnWidths: [4300, W - 8600, 4300], rows: [new TableRow({ children: [
     sig("Nico – Team „Die Allrounder“"), new TableCell({ width: { size: W - 8600, type: WidthType.DXA }, borders: nb, children: [P("")] }), sig("Yannik – Team „Die Allrounder“")] })] }),
@@ -273,8 +273,8 @@ await save("00_Ablaufplan_intern", [sec("Ablaufplan (intern)", [
   H1("Wer macht was?"),
   table([1900, 2100, 4706, 1500], ["Zeit", "Teil", "Was passiert", "Wer"], [
     ["09:15 (10 min)", "Start", "Begrüßen, Ablauf zeigen, Fragen sammeln", "Yannik"],
-    ["09:25 (10 min)", "Formate", "Live zeigen: Schrift, Absatz, Pinsel", "Nico"],
-    ["09:35 (20 min)", "Formatvorlagen", "Vorlage anwenden und ändern, Gliederung, Inhaltsverzeichnis", "Yannik"],
+    ["09:25 (15 min)", "Formate und Vorlagen", "Schrift, Absatz, Pinsel, Formatvorlagen anwenden und ändern", "Nico"],
+    ["09:40 (15 min)", "Inhaltsverzeichnis", "Gliederung zeigen, Inhaltsverzeichnis einfügen und aktualisieren", "Yannik"],
     ["09:55 (10 min)", "Seiten, Kopf und Fuß", "Kopf-/Fußzeile, Seitenzahl, Abschnitt mit Querformat", "Nico"],
     ["10:05 (5 min)", "Eigene Vorlage", "Als .dotx speichern und neu öffnen", "Yannik"],
     ["10:10 (25 min)", "Üben", "Steckbrief in Gruppen (3–5), wir helfen", "Beide"],

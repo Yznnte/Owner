@@ -3,7 +3,7 @@
 <style>
 :root{--navy:#1F3A5F;--blue:#2B579A;--blue2:#3D73C4;--org:#F28C28;--org2:#FFB347;--bg1:#F4F7FC;--bg2:#E6EEFA;--ln:#DDE3EC;--green:#2E9E6B;--red:#E0533D;--txt:#1d2433}
 *{box-sizing:border-box}
-body{margin:0;padding:16px;font-family:Carlito,Calibri,sans-serif;background:#fff;color:var(--txt);font-size:19px}
+body{margin:0;padding:16px;font-family:"Liberation Sans",Arial,sans-serif;background:#fff;color:var(--txt);font-size:19px}
 .fig{width:900px;padding:28px;border-radius:24px;margin:0 0 24px;position:relative;background:linear-gradient(135deg,var(--bg1),var(--bg2));overflow:hidden}
 .fig.org{background:linear-gradient(135deg,#FFF8F0,#FDEBD8)}
 .fig.plain{background:transparent;padding:6px}
@@ -49,7 +49,7 @@ body{margin:0;padding:16px;font-family:Carlito,Calibri,sans-serif;background:#ff
 .cursor{position:absolute;font-size:34px;z-index:6}
 .hero{background:radial-gradient(circle at 85% 20%,#4F86D9 0,transparent 45%),linear-gradient(120deg,#16304F,#2B579A 70%,#3D73C4);color:#fff;padding:44px 46px;min-height:340px}
 .kick{display:inline-block;background:var(--org);color:#fff;font-weight:700;letter-spacing:.18em;font-size:17px;padding:6px 16px;border-radius:999px}
-.ht{font-size:66px;font-weight:700;line-height:1.02;margin:18px 0 10px}
+.ht{font-size:56px;font-weight:700;line-height:1.02;margin:18px 0 10px}
 .hs{font-size:25px;opacity:.92}
 .fl{position:absolute;background:#fff;border-radius:10px;box-shadow:0 20px 44px rgba(0,0,0,.35);padding:14px 16px;color:var(--txt)}
 .tile{flex:1;background:#fff;border-radius:18px;padding:20px 14px;box-shadow:0 8px 20px rgba(31,58,95,.10);text-align:center;position:relative;overflow:hidden}
@@ -80,15 +80,15 @@ body{margin:0;padding:16px;font-family:Carlito,Calibri,sans-serif;background:#ff
 <div class="fig hero" id="hero">
   <span class="kick">EINLADUNG</span>
   <div class="ht">Word-Schulung</div>
-  <div class="hs">Formate · Formatvorlagen · Kopf- und Fußzeile</div>
+  <div class="hs" style="font-size:22px;max-width:470px;line-height:1.35">Formate · Inhaltsverzeichnis ·<br>Kopf- und Fußzeile</div>
   <div class="hs" style="margin-top:28px;font-size:22px;opacity:.8">Team „Die Allrounder“ · Nico und Yannik</div>
-  <div class="fl" style="right:190px;top:52px;width:180px;height:236px;transform:rotate(-8deg)">
+  <div class="fl" style="right:170px;top:60px;width:160px;height:220px;transform:rotate(-8deg)">
     <div style="height:12px;background:#FFE1C2;border-radius:3px"></div>
     <div class="h1" style="font-size:19px">Überschrift</div><div class="ln"></div><div class="ln m"></div><div class="ln s"></div>
     <div class="h2" style="font-size:16px">Unterpunkt</div><div class="ln"></div><div class="ln m"></div>
     <div style="position:absolute;bottom:12px;left:16px;right:16px;height:10px;background:#D7E3F5;border-radius:3px"></div>
   </div>
-  <div class="fl" style="right:40px;top:84px;width:180px;height:236px;transform:rotate(7deg)">
+  <div class="fl" style="right:30px;top:90px;width:160px;height:220px;transform:rotate(7deg)">
     <div style="font-weight:700;color:#2B579A;font-size:20px">Inhalt</div>
     <div style="font-size:14px;color:#555;line-height:2;margin-top:6px">1 Einleitung ....... 2<br>2 Hauptteil ........ 3<br>3 Fazit ............ 5</div>
     <div style="position:absolute;bottom:10px;left:0;right:0;text-align:center;font-size:13px;color:#999">– 1 –</div>
@@ -105,8 +105,8 @@ body{margin:0;padding:16px;font-family:Carlito,Calibri,sans-serif;background:#ff
 
 <!-- ===== LERNEN ===== -->
 <div class="fig org" id="lernen"><div class="row" style="align-items:stretch">
-  <div class="tile"><div class="e">🎨</div><div class="v">Formate</div><div class="d">Schrift und Absätze gestalten</div></div>
-  <div class="tile"><div class="e">⚡</div><div class="v">Format&shy;vorlagen</div><div class="d">Überschriften mit 1 Klick</div></div>
+  <div class="tile"><div class="e">🎨</div><div class="v">Formate</div><div class="d">Schrift, Absätze und Formatvorlagen</div></div>
+  <div class="tile"><div class="e">📋</div><div class="v">Inhalts&shy;verzeichnis</div><div class="d">Automatisch aus den Überschriften</div></div>
   <div class="tile"><div class="e">📄</div><div class="v">Kopf- und Fußzeile</div><div class="d">Name und Seitenzahl auf jeder Seite</div></div>
   <div class="tile"><div class="e">📑</div><div class="v">Eigene Vorlage</div><div class="d">Einmal bauen, immer nutzen</div></div>
 </div></div>
@@ -120,8 +120,8 @@ body{margin:0;padding:16px;font-family:Carlito,Calibri,sans-serif;background:#ff
 <!-- ===== TIMELINE ===== -->
 <div class="fig" id="timeline"><div class="tl">
   <div class="s2"><div class="dot">👋</div><div class="time">09:15</div><div style="font-size:15px;color:#6b778c">10 min</div><div class="nm">Start</div></div>
-  <div class="s2"><div class="dot">🎨</div><div class="time">09:25</div><div style="font-size:15px;color:#6b778c">10 min</div><div class="nm">Formate</div></div>
-  <div class="s2"><div class="dot">⚡</div><div class="time">09:35</div><div style="font-size:15px;color:#6b778c">20 min</div><div class="nm">Format&shy;vorlagen</div></div>
+  <div class="s2"><div class="dot">🎨</div><div class="time">09:25</div><div style="font-size:15px;color:#6b778c">15 min</div><div class="nm">Formate und Vorlagen</div></div>
+  <div class="s2"><div class="dot">📋</div><div class="time">09:40</div><div style="font-size:15px;color:#6b778c">15 min</div><div class="nm">Inhalts&shy;verzeichnis</div></div>
   <div class="s2"><div class="dot">📄</div><div class="time">09:55</div><div style="font-size:15px;color:#6b778c">10 min</div><div class="nm">Seiten, Kopf und Fuß</div></div>
   <div class="s2"><div class="dot">📑</div><div class="time">10:05</div><div style="font-size:15px;color:#6b778c">5 min</div><div class="nm">Eigene Vorlage</div></div>
   <div class="s2"><div class="dot">💻</div><div class="time">10:10</div><div style="font-size:15px;color:#6b778c">25 min</div><div class="nm">Selbst üben</div></div>
@@ -404,7 +404,7 @@ body{margin:0;padding:16px;font-family:Carlito,Calibri,sans-serif;background:#ff
     <div style="padding:22px 28px;background:#F7F8FA;border-radius:0 0 14px 14px;font-size:20px">
       <div class="row" style="gap:14px"><span style="width:120px;color:#555">Dateiname:</span><div class="dd" style="flex:1;background:#fff">Projektdoku-Vorlage</div></div>
       <div class="row" style="gap:14px;margin-top:14px;position:relative"><span style="width:120px;color:#555">Dateityp:</span><div class="dd hl" style="flex:1;font-weight:700;color:#B85E00">Word-Vorlage (*.dotx) <span>▾</span></div><div class="badge" style="top:-18px;right:-14px">1</div></div>
-      <div style="display:flex;justify-content:flex-end;margin-top:20px;position:relative"><span class="tag" style="background:var(--blue);color:#fff;outline:4px solid var(--org);outline-offset:3px">Speichern</span><div class="badge" style="top:-22px;right:-14px">2</div></div>
+      <div style="display:flex;justify-content:flex-end;margin-top:20px;margin-right:40px;position:relative"><span class="tag" style="background:var(--blue);color:#fff;outline:4px solid var(--org);outline-offset:3px">Speichern</span><div class="badge" style="top:-6px;right:-40px">2</div></div>
     </div>
   </div>
   <div class="legend" style="justify-content:center"><div class="chip">Benutzen: Doppelklick auf die .dotx-Datei öffnet ein neues Dokument</div></div>
