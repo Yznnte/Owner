@@ -93,11 +93,10 @@ async function save(name, sections) {
 await save("01_Einladung", [sec(null, [
   img("hero", WPX, { before: 0, after: 260 }),
   P([r("Liebe Schülerinnen und Schüler,", { bold: true, size: 26 })]),
-  P([r("wir, das Team „Die Allrounder“, zeigen euch in nur 20 Minuten, wie ihr in Word schnell schöne und ordentliche Dokumente macht – zum Beispiel für Referate und Projekte. Ihr probiert es direkt am PC aus. Vorkenntnisse braucht ihr nicht.", { size: 24 })], { spacing: { after: 220 } }),
+  P([r("wir, das Team „Die Allrounder“, zeigen euch, wie ihr in Word schnell schöne und ordentliche Dokumente macht – zum Beispiel für Referate und Projekte. Ihr probiert es direkt am PC aus. Vorkenntnisse braucht ihr nicht.", { size: 24 })], { spacing: { after: 220 } }),
   img("tiles", WPX, { after: 100 }),
   H2("Das lernt ihr"),
   img("lernen", WPX, { before: 0, after: 220 }),
-  box([[r("Bitte meldet euch bis ", { size: 24 }), r("Freitag, 13.11.2026", { bold: true, size: 24 }), r(" bei Nico oder Yannik an.", { size: 24 })]]),
   P([r("Wir freuen uns auf euch!", { size: 24 })], { spacing: { before: 300, after: 40 } }),
   P([r("Nico und Yannik", { bold: true, color: NAVY, size: 28 })], { spacing: { after: 0 } }),
   P([r("Team „Die Allrounder“", { color: GREY, size: 24 })]),
