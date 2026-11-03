@@ -75,16 +75,16 @@ const numbering = { config: [
 ] };
 const header = (label) => new Header({ children: [new Paragraph({ tabStops: [{ type: "right", position: W }],
   border: { bottom: { style: BorderStyle.SINGLE, size: 4, color: LINE, space: 4 } },
-  children: [r("Die Allrounder", { bold: true, color: NAVY, size: 18 }), r("  |  Word-Schulung", { color: GREY, size: 18 }), r("\t" + label, { color: GREY, size: 18 })] })] });
+  children: [r("Team „Die Allrounder“", { bold: true, color: NAVY, size: 18 }), r("  |  Word-Schulung", { color: GREY, size: 18 }), r("\t" + label, { color: GREY, size: 18 })] })] });
 const footer = () => new Footer({ children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [
   r("Seite ", { size: 18, color: GREY }), new TextRun({ children: [PageNumber.CURRENT], size: 18, color: GREY, font: FONT }),
   r(" von ", { size: 18, color: GREY }), new TextRun({ children: [PageNumber.TOTAL_PAGES], size: 18, color: GREY, font: FONT }),
-  r("  ·  Nico und Yannik", { size: 18, color: GREY })] })] });
+  r("  ·  Team „Die Allrounder“ (Nico und Yannik)", { size: 18, color: GREY })] })] });
 const simpleFooter = () => new Footer({ children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [r("Team „Die Allrounder“  ·  Nico und Yannik", { size: 18, color: GREY })] })] });
 const page = { size: { width: 11906, height: 16838 }, margin: { top: 850, bottom: 850, left: M, right: M, header: 425, footer: 425 } };
 const sec = (label, children, o = {}) => ({ properties: { page: o.page || page }, headers: label ? { default: header(label) } : undefined, footers: { default: o.footer || footer() }, children });
 async function save(name, sections) {
-  const doc = new Document({ creator: "Nico und Yannik – Die Allrounder", title: name, styles, numbering, sections });
+  const doc = new Document({ creator: "Team „Die Allrounder“ – Nico und Yannik", title: name, styles, numbering, sections });
   fs.writeFileSync(path.join(OUT, name + ".docx"), await Packer.toBuffer(doc)); console.log("wrote", name);
 }
 
@@ -93,13 +93,14 @@ async function save(name, sections) {
 await save("01_Einladung", [sec(null, [
   img("hero", WPX, { before: 0, after: 260 }),
   P([r("Liebe Schülerinnen und Schüler,", { bold: true, size: 26 })]),
-  P([r("wir zeigen euch, wie ihr in Word schnell schöne und ordentliche Dokumente macht – zum Beispiel für Referate und Projekte. Ihr übt alles direkt am PC. Vorkenntnisse braucht ihr nicht.", { size: 24 })], { spacing: { after: 220 } }),
+  P([r("wir, das Team „Die Allrounder“, zeigen euch in nur 20 Minuten, wie ihr in Word schnell schöne und ordentliche Dokumente macht – zum Beispiel für Referate und Projekte. Ihr probiert es direkt am PC aus. Vorkenntnisse braucht ihr nicht.", { size: 24 })], { spacing: { after: 220 } }),
   img("tiles", WPX, { after: 100 }),
   H2("Das lernt ihr"),
   img("lernen", WPX, { before: 0, after: 220 }),
   box([[r("Bitte meldet euch bis ", { size: 24 }), r("Freitag, 13.11.2026", { bold: true, size: 24 }), r(" bei Nico oder Yannik an.", { size: 24 })]]),
   P([r("Wir freuen uns auf euch!", { size: 24 })], { spacing: { before: 300, after: 40 } }),
-  P([r("Nico und Yannik", { bold: true, color: NAVY, size: 28 })]),
+  P([r("Nico und Yannik", { bold: true, color: NAVY, size: 28 })], { spacing: { after: 0 } }),
+  P([r("Team „Die Allrounder“", { color: GREY, size: 24 })]),
 ], { footer: simpleFooter() })]);
 
 // =========================== 02 SCHULUNGSBLATT ===========================
@@ -170,24 +171,19 @@ await save("02_Schulungsblatt", [sec("Schulungsblatt", [
   pb(),
 
   H1("Jetzt seid ihr dran"),
-  P([r("Öffnet die Datei ", { size: 24 }), r("04_Uebungsdatei_Steckbrief", { bold: true, size: 24 }), r(". Arbeitet in Gruppen (3–5 Personen) und hakt ab:", { size: 24 })]),
+  P([r("Öffnet die Datei ", { size: 24 }), r("04_Uebungsdatei_Steckbrief", { bold: true, size: 24 }), r(". Ihr habt 4 Minuten. Arbeitet in Gruppen (3–5 Personen) und hakt ab:", { size: 24 })]),
   check("„Mein Steckbrief“ bekommt die Vorlage „Titel“."),
   check("Über mich, Hobbys, Traumberuf bekommen „Überschrift 1“."),
-  check("„Überschrift 1“ ändern: eine neue Farbe."),
-  check("In der Gliederung „Traumberuf“ nach oben schieben."),
-  check("Nach dem Titel: Strg + Enter, Inhaltsverzeichnis, wieder Strg + Enter."),
-  check("Kopfzeile: Name und Klasse. Fußzeile: Seitenzahl."),
-  check("„Erste Seite anders“ anhaken."),
-  check("Als Word-Vorlage (.dotx) speichern."),
+  check("Kopfzeile: euren Namen eintragen. Fußzeile: Seitenzahl."),
+  check("Nach dem Titel: Strg + Enter und Inhaltsverzeichnis einfügen."),
+  P([r("Schnell fertig? Bonus: „Überschrift 1“ umfärben, Gliederung ausprobieren, als .dotx speichern.", { italics: true, color: GREY, size: 22 })], { spacing: { before: 120 } }),
   H2("So soll es am Ende aussehen"),
   img("ziel", 600),
   pb(),
   H1("Quiz"),
   ...steps([
-    "Ist „zentriert“ ein Zeichenformat oder ein Absatzformat?",
     "Warum braucht ein Inhaltsverzeichnis Formatvorlagen?",
     "Wie öffnet ihr die Kopfzeile am schnellsten?",
-    "Wozu ist eine Dokumentvorlage (.dotx) gut?",
   ], 25),
   img("regeln", WPX, { before: 300 }),
 ])]);
@@ -229,7 +225,7 @@ await save("03_Handout", [sec("Handout", [
 
 // =========================== 04 ÜBUNGSDATEI ===========================
 const plain = (t) => new Paragraph({ children: [new TextRun(t)] });
-await save("04_Uebungsdatei_Steckbrief", [{ properties: { page }, children: [
+await save("04_Uebungsdatei_Steckbrief", [{ properties: { page }, headers: { default: new Header({ children: [new Paragraph({ children: [new TextRun("Übungsdatei – Team „Die Allrounder“")] })] }) }, children: [
   "Mein Steckbrief", "Über mich", "Ich heiße … und bin … Jahre alt. Ich gehe in die Klasse … .",
   "Hobbys", "In meiner Freizeit mache ich gerne … .", "Traumberuf", "Später möchte ich … werden, weil … .",
 ].map(plain) }]);
@@ -259,26 +255,26 @@ await save("06_Teilnahmebescheinigung", [sec(null, [
   P([r("Hiermit bestätigen wir, dass", { size: 26 })], { alignment: C }),
   new Paragraph({ alignment: C, spacing: { before: 600, after: 60 }, indent: { left: 1500, right: 1500 }, border: { bottom: { style: BorderStyle.SINGLE, size: 6, color: NAVY, space: 1 } }, children: [] }),
   P([r("Name, Klasse", { size: 18, color: GREY })], { alignment: C, spacing: { after: 400 } }),
-  P([r("am 17. November 2026 an der", { size: 26 })], { alignment: C }),
+  P([r("am 17. November 2026 an der 20-minütigen", { size: 26 })], { alignment: C }),
   P([r("Word-Schulung", { bold: true, color: NAVY, size: 52 })], { alignment: C, spacing: { before: 160, after: 60 } }),
   P([r("Formate · Formatvorlagen · Kopf- und Fußzeile · Dokumentvorlagen", { color: GREY, size: 24 })], { alignment: C, spacing: { after: 200 } }),
   P([r("erfolgreich teilgenommen hat.", { size: 26 })], { alignment: C, spacing: { after: 400 } }),
   new Table({ width: { size: W, type: WidthType.DXA }, columnWidths: [4300, W - 8600, 4300], rows: [new TableRow({ children: [
-    sig("Nico"), new TableCell({ width: { size: W - 8600, type: WidthType.DXA }, borders: nb, children: [P("")] }), sig("Yannik")] })] }),
+    sig("Nico – Team „Die Allrounder“"), new TableCell({ width: { size: W - 8600, type: WidthType.DXA }, borders: nb, children: [P("")] }), sig("Yannik – Team „Die Allrounder“")] })] }),
 ], { footer: simpleFooter(), page: { ...page, borders: { pageBorderTop: dbl, pageBorderBottom: dbl, pageBorderLeft: dbl, pageBorderRight: dbl } } })]);
 
 // =========================== 00 ABLAUFPLAN ===========================
 await save("00_Ablaufplan_intern", [sec("Ablaufplan (intern)", [
   img("ban_ablauf", WPX, { before: 0, after: 100 }),
   H1("Wer macht was?"),
-  table([1100, 2300, 5106, 1700], ["Zeit", "Teil", "Was passiert", "Wer"], [
-    ["08:30", "Start", "Begrüßen, Ablauf zeigen, Fragen sammeln", "Yannik"],
-    ["08:40", "Formate", "Live zeigen: Schrift, Absatz, Pinsel", "Nico"],
-    ["08:50", "Formatvorlagen", "Vorher/Nachher, Vorlage ändern, Gliederung, Inhaltsverzeichnis", "Yannik"],
-    ["09:10", "Seiten, Kopf und Fuß", "Kopf-/Fußzeile, Seitenzahl, Abschnitt mit Querformat", "Nico"],
-    ["09:20", "Eigene Vorlage", "Als .dotx speichern und neu öffnen", "Yannik"],
-    ["09:25", "Üben", "Steckbrief in Gruppen (3–5), wir helfen", "Beide"],
-    ["09:45", "Quiz und Ende", "Quiz, Handout, Feedback, Bescheinigung", "Beide"],
+  table([1600, 2100, 4806, 1700], ["Zeit", "Teil", "Was passiert", "Wer"], [
+    ["08:30 (2 min)", "Start", "Begrüßen, Ablauf zeigen, kurz Fragen sammeln", "Yannik"],
+    ["08:32 (3 min)", "Formate", "Live zeigen: Schrift, Absatz, Pinsel", "Nico"],
+    ["08:35 (4 min)", "Formatvorlagen", "Vorlage anwenden und ändern, Gliederung und Inhaltsverzeichnis kurz zeigen", "Yannik"],
+    ["08:39 (3 min)", "Seiten, Kopf und Fuß", "Kopf-/Fußzeile, Seitenzahl, Querformat kurz zeigen", "Nico"],
+    ["08:42 (2 min)", "Eigene Vorlage", "Als .dotx speichern und neu öffnen", "Yannik"],
+    ["08:44 (4 min)", "Üben", "Steckbrief: 4 Aufgaben in Gruppen, wir helfen", "Beide"],
+    ["08:48 (2 min)", "Quiz und Ende", "2 Quizfragen, Handout, Feedback, Bescheinigung", "Beide"],
   ], { boldFirst: true }),
   H1("Checkliste"),
   check("Einladung aufgehängt, Anmeldungen gezählt"),
@@ -288,6 +284,7 @@ await save("00_Ablaufplan_intern", [sec("Ablaufplan (intern)", [
   check("Einmal komplett geprobt (mit Uhr)"),
   box([[r("Tipps: ", { bold: true }), r("frei sprechen · langsam klicken und ansagen · Fragen stellen · Handout erst am Ende austeilen")]], BLUEBG, NAVY),
   H1("Quiz-Lösungen"),
-  ...steps(["Absatzformat – gilt für den ganzen Absatz.", "Word erkennt Überschriften nur an der Formatvorlage.", "Doppelklick in den oberen Seitenrand.", "Jedes neue Dokument ist sofort fertig eingerichtet."], 23),
+  ...steps(["Word erkennt Überschriften nur an der Formatvorlage.", "Doppelklick in den oberen Seitenrand."], 23),
+  box([[r("Zeit knapp? ", { bold: true }), r("Bei 20 Minuten nur zeigen, nicht erklären. Gliederung und Querformat notfalls weglassen – sie stehen im Handout.")]], ORGBG, ACCENT),
 ])]);
 })();
