@@ -1,478 +1,440 @@
 <!doctype html>
 <html lang="de"><head><meta charset="utf-8">
 <style>
-:root{--navy:#1F3A5F;--blue:#2B579A;--blue2:#3D73C4;--org:#F28C28;--org2:#FFB347;--bg1:#F4F7FC;--bg2:#E6EEFA;--ln:#E1E6EE;--green:#2E9E6B;--red:#E0533D}
+:root{--navy:#1F3A5F;--blue:#2B579A;--blue2:#3D73C4;--org:#F28C28;--org2:#FFB347;--bg1:#F4F7FC;--bg2:#E6EEFA;--ln:#DDE3EC;--green:#2E9E6B;--red:#E0533D;--txt:#1d2433}
 *{box-sizing:border-box}
-body{margin:0;padding:20px;font-family:Inter,sans-serif;background:#fff;color:#1d2433}
-.fig{width:1200px;padding:40px;border-radius:32px;margin:0 0 30px;position:relative;background:linear-gradient(135deg,var(--bg1),var(--bg2));overflow:hidden}
+body{margin:0;padding:16px;font-family:Carlito,Calibri,sans-serif;background:#fff;color:var(--txt);font-size:19px}
+.fig{width:900px;padding:28px;border-radius:24px;margin:0 0 24px;position:relative;background:linear-gradient(135deg,var(--bg1),var(--bg2));overflow:hidden}
 .fig.org{background:linear-gradient(135deg,#FFF8F0,#FDEBD8)}
-.fig.plain{background:transparent;padding:10px}
-.cap{font-weight:800;font-size:30px;color:var(--navy);margin:0 0 24px;display:flex;align-items:center;gap:14px}
-.cap .num{background:var(--org);color:#fff;border-radius:12px;padding:4px 14px;font-size:22px}
-.row{display:flex;gap:28px;align-items:center}
-.col{display:flex;flex-direction:column;gap:18px}
-/* window */
-.win{background:#fff;border-radius:16px;box-shadow:0 20px 44px rgba(31,58,95,.20),0 2px 6px rgba(0,0,0,.06);overflow:visible;position:relative}
-.tb{background:var(--blue);color:#fff;height:40px;border-radius:16px 16px 0 0;display:flex;align-items:center;padding:0 18px;font-size:15px;gap:10px}
-.tb .dots span{display:inline-block;width:11px;height:11px;border-radius:50%;background:rgba(255,255,255,.45);margin-right:6px}
-.tb .t{flex:1;text-align:center;opacity:.9}
-.tabs{background:var(--blue);display:flex;gap:2px;padding:0 14px}
-.tab{color:#E3ECF8;padding:9px 16px;font-size:15px;font-weight:500}
-.tab.on{background:#F3F3F3;color:var(--blue);font-weight:700;border-radius:9px 9px 0 0}
-.tab.ctx{background:#FFE7CC;color:#B85E00;font-weight:700;border-radius:9px 9px 0 0}
-.rib{background:#F3F3F3;display:flex;padding:18px 12px 8px;border-bottom:1px solid #ddd;min-height:132px;border-radius:0 0 16px 16px}
-.win.doc .rib{border-radius:0}
-.grp{display:flex;flex-direction:column;justify-content:space-between;padding:6px 18px;border-right:1px solid #D6D6D6;position:relative}
+.fig.plain{background:transparent;padding:6px}
+.row{display:flex;gap:20px;align-items:center}
+.col{display:flex;flex-direction:column;gap:14px}
+/* Word window */
+.win{background:#fff;border-radius:14px;box-shadow:0 14px 32px rgba(31,58,95,.20);position:relative}
+.tabs{background:var(--blue);display:flex;gap:2px;padding:8px 12px 0;border-radius:14px 14px 0 0}
+.tab{color:#E3ECF8;padding:7px 13px;font-size:18px}
+.tab.on{background:#F3F3F3;color:var(--blue);font-weight:700;border-radius:8px 8px 0 0}
+.tab.ctx{background:#FFE7CC;color:#B85E00;font-weight:700;border-radius:8px 8px 0 0}
+.rib{background:#F3F3F3;display:flex;padding:16px 10px 8px;min-height:120px;border-radius:0 0 14px 14px;align-items:stretch}
+.grp{display:flex;flex-direction:column;justify-content:space-between;padding:4px 14px;border-right:1px solid #D6D6D6;position:relative}
 .grp:last-child{border-right:none}
-.lbl{font-size:12.5px;color:#666;text-align:center;margin-top:10px}
-.hl{outline:4px solid var(--org);outline-offset:3px;border-radius:12px;background:#FFF4E8 !important;box-shadow:0 0 0 12px rgba(242,140,40,.12)}
-.badge{position:absolute;top:-26px;right:-22px;width:44px;height:44px;border-radius:50%;background:var(--org);color:#fff;font-weight:800;font-size:23px;display:flex;align-items:center;justify-content:center;box-shadow:0 5px 12px rgba(242,140,40,.55);border:3px solid #fff;z-index:5}
+.lbl{font-size:16px;color:#555;text-align:center;margin-top:8px}
+.hl{outline:4px solid var(--org);outline-offset:3px;border-radius:10px;background:#FFF4E8 !important}
+.badge{position:absolute;top:-22px;right:-18px;width:38px;height:38px;border-radius:50%;background:var(--org);color:#fff;font-weight:700;font-size:22px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 10px rgba(242,140,40,.5);border:3px solid #fff;z-index:5}
 .btnrow{display:flex;gap:6px;align-items:center}
-.ib{width:36px;height:34px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:19px;color:#333;background:#fff;border:1px solid #DADADA}
-.dd{height:34px;border:1px solid #CFCFCF;background:#fff;border-radius:7px;display:flex;align-items:center;padding:0 10px;font-size:15px;justify-content:space-between}
-.big{display:flex;flex-direction:column;align-items:center;gap:6px;font-size:13.5px;color:#333;padding:4px 8px;border-radius:10px;position:relative;text-align:center}
-.big .ico{width:58px;height:58px;display:flex;align-items:center;justify-content:center}
-/* style gallery */
-.gal{display:flex;gap:8px}
-.st{width:118px;height:84px;background:#fff;border:1px solid #DADADA;border-radius:9px;display:flex;flex-direction:column;justify-content:center;padding:8px 10px;position:relative}
-.st .p{font-size:20px;line-height:1.1}
-.st .n{font-size:12px;color:#666;margin-top:6px}
+.ib{min-width:34px;height:34px;padding:0 6px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:19px;color:#333;background:#fff;border:1px solid #D2D2D2}
+.dd{height:34px;border:1px solid #CFCFCF;background:#fff;border-radius:6px;display:flex;align-items:center;padding:0 9px;font-size:18px;justify-content:space-between;gap:8px}
+.big{display:flex;flex-direction:column;align-items:center;gap:5px;font-size:17px;color:#333;padding:4px 8px;border-radius:9px;position:relative;text-align:center;line-height:1.15}
+.gal{display:flex;gap:7px}
+.st{width:104px;height:76px;background:#fff;border:1px solid #D2D2D2;border-radius:8px;display:flex;flex-direction:column;justify-content:center;padding:6px 9px;position:relative}
+.st .p{font-size:21px;line-height:1.1}
+.st .n{font-size:15px;color:#555;margin-top:4px}
 /* pages */
-.page{background:#fff;border-radius:10px;box-shadow:0 14px 34px rgba(31,58,95,.18);padding:30px 34px;position:relative}
-.ln{height:11px;background:var(--ln);border-radius:6px;margin:9px 0}
-.ln.s{width:62%}.ln.m{width:82%}
-.h1{font-weight:800;color:var(--navy);font-size:24px;margin:16px 0 4px}
-.h2{font-weight:700;color:var(--org);font-size:19px;margin:12px 0 2px}
-.mark{display:inline-flex;align-items:center;justify-content:center;width:52px;height:52px;border-radius:50%;font-size:30px;font-weight:900;color:#fff;position:absolute;top:-20px;right:-20px;border:4px solid #fff;box-shadow:0 6px 14px rgba(0,0,0,.18)}
+.page{background:#fff;border-radius:8px;box-shadow:0 10px 26px rgba(31,58,95,.18);padding:22px 26px;position:relative}
+.ln{height:10px;background:var(--ln);border-radius:5px;margin:8px 0}
+.ln.s{width:60%}.ln.m{width:82%}
+.h1{font-weight:700;color:var(--navy);font-size:24px;margin:12px 0 2px}
+.h2{font-weight:700;color:var(--org);font-size:20px;margin:10px 0 2px}
+.mark{display:flex;align-items:center;justify-content:center;width:46px;height:46px;border-radius:50%;font-size:28px;font-weight:700;color:#fff;position:absolute;top:-16px;right:-16px;border:4px solid #fff;box-shadow:0 5px 12px rgba(0,0,0,.18)}
 .ok{background:var(--green)}.no{background:var(--red)}
-.tag{display:inline-block;padding:7px 16px;border-radius:999px;font-weight:700;font-size:17px}
-.arrow{font-size:60px;color:var(--org);font-weight:900}
-.chip{display:flex;align-items:center;gap:12px;background:#fff;border-radius:14px;padding:12px 18px;font-size:19px;box-shadow:0 4px 12px rgba(31,58,95,.08);font-weight:600;color:var(--navy)}
-.chip b{background:var(--org);color:#fff;border-radius:50%;width:34px;height:34px;display:flex;align-items:center;justify-content:center;flex:none}
-.legend{display:flex;gap:16px;margin-top:30px;flex-wrap:wrap}
-/* keys */
-.key{display:inline-flex;align-items:center;justify-content:center;min-width:64px;height:58px;padding:0 16px;border-radius:12px;background:linear-gradient(#fff,#EEF1F6);border:1px solid #C9D1DE;box-shadow:0 5px 0 #B7C1D1,0 8px 14px rgba(31,58,95,.15);font-family:'JetBrains Mono',monospace;font-weight:700;font-size:20px;color:var(--navy)}
-.plus{font-size:26px;color:#8a97ab;margin:0 8px;font-weight:700}
-.sc{background:#fff;border-radius:20px;padding:22px 24px;box-shadow:0 8px 22px rgba(31,58,95,.10);display:flex;flex-direction:column;gap:16px}
-.sc .what{font-size:21px;font-weight:800;color:var(--navy);display:flex;align-items:center;gap:10px}
-.cursor{position:absolute;font-size:40px;z-index:6;filter:drop-shadow(0 3px 3px rgba(0,0,0,.25))}
-.hero{background:radial-gradient(circle at 85% 20%,#4F86D9 0,transparent 45%),linear-gradient(120deg,#16304F,#2B579A 70%,#3D73C4);color:#fff;padding:56px 60px;min-height:440px}
-.kick{display:inline-block;background:var(--org);color:#fff;font-weight:800;letter-spacing:.25em;font-size:18px;padding:8px 18px;border-radius:999px}
-.ht{font-size:78px;font-weight:900;line-height:1.02;margin:22px 0 14px;letter-spacing:-.02em}
-.hs{font-size:26px;opacity:.9;font-weight:500}
-.fl{position:absolute;background:#fff;border-radius:12px;box-shadow:0 24px 50px rgba(0,0,0,.35);padding:18px 20px}
-.tile{flex:1;background:#fff;border-radius:22px;padding:26px 22px;box-shadow:0 10px 24px rgba(31,58,95,.10);text-align:center;position:relative;overflow:hidden}
-.tile .e{font-size:52px}
-.tile .k{font-size:15px;text-transform:uppercase;letter-spacing:.12em;color:#7a879b;font-weight:700;margin-top:10px}
-.tile .v{font-size:25px;font-weight:800;color:var(--navy);margin-top:6px;line-height:1.2}
-.tile:before{content:"";position:absolute;left:0;top:0;right:0;height:7px;background:linear-gradient(90deg,var(--org),var(--org2))}
-.ctxm{background:#fff;border:1px solid #D0D0D0;border-radius:10px;box-shadow:0 16px 36px rgba(0,0,0,.22);padding:8px 0;width:520px;font-size:18px}
-.ctxm div{padding:11px 22px}
+.tag{display:inline-block;padding:6px 14px;border-radius:999px;font-weight:700;font-size:20px}
+.arrow{font-size:52px;color:var(--org);font-weight:700;line-height:1}
+.legend{display:flex;gap:12px;margin-top:22px;flex-wrap:wrap}
+.chip{display:flex;align-items:center;gap:10px;background:#fff;border-radius:12px;padding:9px 15px;font-size:20px;box-shadow:0 3px 10px rgba(31,58,95,.08);font-weight:700;color:var(--navy)}
+.chip b{background:var(--org);color:#fff;border-radius:50%;width:30px;height:30px;display:flex;align-items:center;justify-content:center;flex:none;font-size:18px}
+.key{display:inline-flex;align-items:center;justify-content:center;min-width:56px;height:50px;padding:0 14px;border-radius:10px;background:linear-gradient(#fff,#EEF1F6);border:1px solid #C9D1DE;box-shadow:0 4px 0 #B7C1D1,0 6px 12px rgba(31,58,95,.12);font-weight:700;font-size:21px;color:var(--navy)}
+.plus{font-size:24px;color:#8a97ab;margin:0 6px;font-weight:700}
+.sc{background:#fff;border-radius:16px;padding:16px 18px;box-shadow:0 6px 16px rgba(31,58,95,.10);display:flex;flex-direction:column;gap:12px}
+.sc .what{font-size:22px;font-weight:700;color:var(--navy)}
+.cursor{position:absolute;font-size:34px;z-index:6}
+.hero{background:radial-gradient(circle at 85% 20%,#4F86D9 0,transparent 45%),linear-gradient(120deg,#16304F,#2B579A 70%,#3D73C4);color:#fff;padding:44px 46px;min-height:340px}
+.kick{display:inline-block;background:var(--org);color:#fff;font-weight:700;letter-spacing:.18em;font-size:17px;padding:6px 16px;border-radius:999px}
+.ht{font-size:66px;font-weight:700;line-height:1.02;margin:18px 0 10px}
+.hs{font-size:25px;opacity:.92}
+.fl{position:absolute;background:#fff;border-radius:10px;box-shadow:0 20px 44px rgba(0,0,0,.35);padding:14px 16px;color:var(--txt)}
+.tile{flex:1;background:#fff;border-radius:18px;padding:20px 14px;box-shadow:0 8px 20px rgba(31,58,95,.10);text-align:center;position:relative;overflow:hidden}
+.tile .e{font-size:42px;height:52px;display:flex;align-items:center;justify-content:center}
+.tile .k{font-size:15px;text-transform:uppercase;letter-spacing:.1em;color:#6b778c;font-weight:700;margin-top:8px}
+.tile .v{font-size:24px;font-weight:700;color:var(--navy);margin-top:4px;line-height:1.15}
+.tile .d{font-size:18px;color:#555;margin-top:6px}
+.tile:before{content:"";position:absolute;left:0;top:0;right:0;height:6px;background:linear-gradient(90deg,var(--org),var(--org2))}
+.ctxm{background:#fff;border:1px solid #D0D0D0;border-radius:9px;box-shadow:0 14px 30px rgba(0,0,0,.2);padding:6px 0;width:400px;font-size:19px}
+.ctxm div{padding:9px 18px}
 .ctxm .on{background:#FFF1E2;color:#B85E00;font-weight:700;border-left:5px solid var(--org)}
-.banner{background:linear-gradient(120deg,#16304F,#2B579A 65%,#3D73C4);color:#fff;padding:40px 54px;min-height:230px}
-.banner .t{font-size:56px;font-weight:900;letter-spacing:-.02em;margin-top:14px;line-height:1.05}
-.banner .s{font-size:23px;opacity:.88;margin-top:10px}
-.tl{display:flex;gap:0;position:relative;margin-top:10px}
-.tl .st2{flex:1;text-align:center;position:relative}
-.tl .dot{width:86px;height:86px;border-radius:50%;margin:0 auto;background:#fff;display:flex;align-items:center;justify-content:center;font-size:40px;box-shadow:0 8px 18px rgba(31,58,95,.15);border:4px solid var(--blue2);position:relative;z-index:2}
-.tl .time{font-weight:800;color:var(--org);font-size:19px;margin-top:14px}
-.tl .nm{font-weight:700;color:var(--navy);font-size:18px;margin-top:4px;line-height:1.2}
-.tl:before{content:"";position:absolute;top:43px;left:7%;right:7%;height:6px;background:linear-gradient(90deg,var(--blue2),var(--org));border-radius:3px;z-index:1}
-.rule{display:flex;gap:18px;align-items:center;background:#fff;border-radius:18px;padding:20px 22px;box-shadow:0 6px 16px rgba(31,58,95,.08);font-size:21px;font-weight:600;color:var(--navy)}
-.rule .e{font-size:38px}
+.banner{background:linear-gradient(120deg,#16304F,#2B579A 65%,#3D73C4);color:#fff;padding:30px 40px;min-height:170px}
+.banner .t{font-size:50px;font-weight:700;margin-top:12px;line-height:1.05}
+.banner .s{font-size:23px;opacity:.9;margin-top:8px}
+.tl{display:flex;position:relative}
+.tl .s2{flex:1;text-align:center;position:relative}
+.tl .dot{width:64px;height:64px;border-radius:50%;margin:0 auto;background:#fff;display:flex;align-items:center;justify-content:center;font-size:30px;box-shadow:0 6px 14px rgba(31,58,95,.15);border:4px solid var(--blue2);position:relative;z-index:2}
+.tl .time{font-weight:700;color:var(--org);font-size:19px;margin-top:10px}
+.tl .nm{font-weight:700;color:var(--navy);font-size:18px;margin-top:2px;line-height:1.15}
+.tl:before{content:"";position:absolute;top:32px;left:6%;right:6%;height:5px;background:linear-gradient(90deg,var(--blue2),var(--org));border-radius:3px;z-index:1}
+.rule{display:flex;gap:14px;align-items:center;background:#fff;border-radius:14px;padding:14px 16px;box-shadow:0 5px 14px rgba(31,58,95,.08);font-size:21px;font-weight:700;color:var(--navy)}
+.rule .n{background:var(--org);color:#fff;border-radius:50%;width:36px;height:36px;flex:none;display:flex;align-items:center;justify-content:center}
+.ico{width:52px;height:52px;display:flex;align-items:center;justify-content:center}
+.small{font-size:16px;color:#666}
 </style></head><body>
 
-<!-- ============ HERO EINLADUNG ============ -->
+<!-- ===== HERO ===== -->
 <div class="fig hero" id="hero">
   <span class="kick">EINLADUNG</span>
   <div class="ht">Word-Schulung</div>
-  <div class="hs">Formate · Formatvorlagen · Kopf- &amp; Fußzeile</div>
-  <div class="hs" style="margin-top:34px;font-size:22px;opacity:.8">✨ Schöne Dokumente in Rekordzeit</div>
-  <div class="fl" style="right:250px;top:70px;width:230px;height:300px;transform:rotate(-8deg)">
-    <div style="height:14px;background:#FFE1C2;border-radius:4px"></div>
-    <div class="h1" style="font-size:20px">Überschrift</div><div class="ln"></div><div class="ln m"></div><div class="ln s"></div>
+  <div class="hs">Formate · Formatvorlagen · Kopf- und Fußzeile</div>
+  <div class="hs" style="margin-top:28px;font-size:22px;opacity:.8">Schöne Dokumente – schnell und einfach</div>
+  <div class="fl" style="right:190px;top:52px;width:180px;height:236px;transform:rotate(-8deg)">
+    <div style="height:12px;background:#FFE1C2;border-radius:3px"></div>
+    <div class="h1" style="font-size:19px">Überschrift</div><div class="ln"></div><div class="ln m"></div><div class="ln s"></div>
     <div class="h2" style="font-size:16px">Unterpunkt</div><div class="ln"></div><div class="ln m"></div>
-    <div style="position:absolute;bottom:14px;left:20px;right:20px;height:12px;background:#D7E3F5;border-radius:4px"></div>
+    <div style="position:absolute;bottom:12px;left:16px;right:16px;height:10px;background:#D7E3F5;border-radius:3px"></div>
   </div>
-  <div class="fl" style="right:60px;top:110px;width:230px;height:300px;transform:rotate(7deg)">
-    <div style="font-weight:900;color:#2B579A;font-size:22px">Inhalt</div>
-    <div style="font-size:14px;color:#555;line-height:2.1;margin-top:8px">1 Einleitung ········ 2<br>2 Hauptteil ········· 3<br>3 Fazit ············· 5</div>
-    <div class="ln m" style="margin-top:20px"></div><div class="ln s"></div>
-    <div style="position:absolute;bottom:14px;left:0;right:0;text-align:center;font-size:13px;color:#999">– 1 –</div>
-  </div>
-</div>
-
-<!-- ============ INFO TILES ============ -->
-<div class="fig" id="tiles">
-  <div class="row" style="align-items:stretch">
-    <div class="tile"><div class="e"><div style="width:58px;height:58px;margin:0 auto;border-radius:9px;background:#fff;box-shadow:0 3px 8px rgba(0,0,0,.15);overflow:hidden;display:flex;flex-direction:column"><div style="background:#E0533D;color:#fff;font-weight:800;font-size:13px;text-align:center;line-height:1.5">NOV</div><div style="flex:1;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:26px;color:#1d2433">17</div></div></div><div class="k">Datum</div><div class="v">Di, 17.11.2026</div></div>
-    <div class="tile"><div class="e">⏰</div><div class="k">Uhrzeit</div><div class="v">08:30 – 10:00</div></div>
-    <div class="tile"><div class="e">📍</div><div class="k">Ort</div><div class="v">Raum 0.68</div></div>
-    <div class="tile"><div class="e">🎒</div><div class="k">Mitbringen</div><div class="v">Nur euch!</div></div>
+  <div class="fl" style="right:40px;top:84px;width:180px;height:236px;transform:rotate(7deg)">
+    <div style="font-weight:700;color:#2B579A;font-size:20px">Inhalt</div>
+    <div style="font-size:14px;color:#555;line-height:2;margin-top:6px">1 Einleitung ....... 2<br>2 Hauptteil ........ 3<br>3 Fazit ............ 5</div>
+    <div style="position:absolute;bottom:10px;left:0;right:0;text-align:center;font-size:13px;color:#999">– 1 –</div>
   </div>
 </div>
 
-<!-- ============ LERNEN ============ -->
-<div class="fig org" id="lernen">
-  <div class="row" style="align-items:stretch">
-    <div class="tile"><div class="e">🎨</div><div class="v">Formate</div><div style="font-size:18px;color:#555;margin-top:8px">Schrift &amp; Absätze gestalten</div></div>
-    <div class="tile"><div class="e">⚡</div><div class="v">Formatvorlagen</div><div style="font-size:18px;color:#555;margin-top:8px">Ein Klick – alles einheitlich</div></div>
-    <div class="tile"><div class="e">📄</div><div class="v">Kopf- &amp; Fußzeile</div><div style="font-size:18px;color:#555;margin-top:8px">Name &amp; Seitenzahl überall</div></div>
-  </div>
-</div>
+<!-- ===== TILES ===== -->
+<div class="fig" id="tiles"><div class="row" style="align-items:stretch">
+  <div class="tile"><div class="e"><div style="width:46px;height:46px;border-radius:8px;background:#fff;box-shadow:0 2px 6px rgba(0,0,0,.18);overflow:hidden;display:flex;flex-direction:column"><div style="background:#E0533D;color:#fff;font-weight:700;font-size:12px;line-height:1.5">NOV</div><div style="flex:1;font-weight:700;font-size:22px;display:flex;align-items:center;justify-content:center">17</div></div></div><div class="k">Datum</div><div class="v">Di, 17.11.2026</div></div>
+  <div class="tile"><div class="e">⏰</div><div class="k">Uhrzeit</div><div class="v">08:30 – 10:00</div></div>
+  <div class="tile"><div class="e">📍</div><div class="k">Ort</div><div class="v">Raum 0.68</div></div>
+  <div class="tile"><div class="e">🎒</div><div class="k">Mitbringen</div><div class="v">Nichts</div></div>
+</div></div>
 
-<!-- ============ BANNERS ============ -->
-<div class="fig banner" id="ban_schulung"><span class="kick">SCHULUNGSBLATT</span><div class="t">Word wie die Profis 🚀</div><div class="s">Formate · Formatvorlagen · Kopf- &amp; Fußzeile</div></div>
-<div class="fig banner" id="ban_handout"><span class="kick">HANDOUT</span><div class="t">Word auf einen Blick 💡</div><div class="s">Alles Wichtige zum Nachschlagen</div></div>
-<div class="fig banner" id="ban_ablauf"><span class="kick">INTERN · NICO &amp; YANNIK</span><div class="t">Ablaufplan 🗓️</div><div class="s">90 Minuten Word-Schulung</div></div>
-<div class="fig banner" id="ban_feedback"><span class="kick">FEEDBACK</span><div class="t">Wie fandet ihr’s? 💬</div><div class="s">Anonym – hilft uns, besser zu werden</div></div>
+<!-- ===== LERNEN ===== -->
+<div class="fig org" id="lernen"><div class="row" style="align-items:stretch">
+  <div class="tile"><div class="e">🎨</div><div class="v">Formate</div><div class="d">Schrift und Absätze gestalten</div></div>
+  <div class="tile"><div class="e">⚡</div><div class="v">Format&shy;vorlagen</div><div class="d">Überschriften mit 1 Klick</div></div>
+  <div class="tile"><div class="e">📄</div><div class="v">Kopf- und Fußzeile</div><div class="d">Name und Seitenzahl auf jeder Seite</div></div>
+  <div class="tile"><div class="e">📑</div><div class="v">Eigene Vorlage</div><div class="d">Einmal bauen, immer nutzen</div></div>
+</div></div>
 
-<!-- ============ TIMELINE ============ -->
-<div class="fig" id="timeline">
-  <div class="tl">
-    <div class="st2"><div class="dot">👋</div><div class="time">08:30</div><div class="nm">Start</div></div>
-    <div class="st2"><div class="dot">🎨</div><div class="time">08:40</div><div class="nm">Formate</div></div>
-    <div class="st2"><div class="dot">⚡</div><div class="time">08:55</div><div class="nm">Format&shy;vorlagen</div></div>
-    <div class="st2"><div class="dot">📄</div><div class="time">09:10</div><div class="nm">Kopf- &amp; Fußzeile</div></div>
-    <div class="st2"><div class="dot">💻</div><div class="time">09:20</div><div class="nm">Selbst üben</div></div>
-    <div class="st2"><div class="dot">❓</div><div class="time">09:45</div><div class="nm">Quiz</div></div>
-    <div class="st2"><div class="dot">🏅</div><div class="time">09:52</div><div class="nm">Abschluss</div></div>
-  </div>
-</div>
+<!-- ===== BANNERS ===== -->
+<div class="fig banner" id="ban_schulung"><span class="kick">SCHULUNGSBLATT</span><div class="t">Word wie die Profis</div><div class="s">Schritt für Schritt erklärt</div></div>
+<div class="fig banner" id="ban_handout"><span class="kick">HANDOUT</span><div class="t">Word auf einen Blick</div><div class="s">Alles Wichtige zum Nachschlagen</div></div>
+<div class="fig banner" id="ban_ablauf"><span class="kick">INTERN · NICO UND YANNIK</span><div class="t">Ablaufplan</div><div class="s">90 Minuten Word-Schulung</div></div>
+<div class="fig banner" id="ban_feedback"><span class="kick">FEEDBACK</span><div class="t">Wie fandet ihr es?</div><div class="s">Anonym – hilft uns, besser zu werden</div></div>
 
-<!-- ============ RIBBON START: FORMATE ============ -->
+<!-- ===== TIMELINE ===== -->
+<div class="fig" id="timeline"><div class="tl">
+  <div class="s2"><div class="dot">👋</div><div class="time">08:30</div><div class="nm">Start</div></div>
+  <div class="s2"><div class="dot">🎨</div><div class="time">08:40</div><div class="nm">Formate</div></div>
+  <div class="s2"><div class="dot">⚡</div><div class="time">08:50</div><div class="nm">Format&shy;vorlagen</div></div>
+  <div class="s2"><div class="dot">📄</div><div class="time">09:10</div><div class="nm">Seiten, Kopf und Fuß</div></div>
+  <div class="s2"><div class="dot">📑</div><div class="time">09:20</div><div class="nm">Eigene Vorlage</div></div>
+  <div class="s2"><div class="dot">💻</div><div class="time">09:25</div><div class="nm">Selbst üben</div></div>
+  <div class="s2"><div class="dot">🏅</div><div class="time">09:45</div><div class="nm">Quiz und Ende</div></div>
+</div></div>
+
+<!-- ===== RIB FORMAT ===== -->
 <div class="fig" id="rib_format">
-  <div class="cap"><span class="num">Start</span> Hier findet ihr alle Formate</div>
   <div class="win">
-    <div class="tb"><span class="dots"><span></span><span></span><span></span></span><span class="t">Dokument1 – Word</span></div>
-    <div class="tabs"><div class="tab">Datei</div><div class="tab on">Start</div><div class="tab">Einfügen</div><div class="tab">Entwurf</div><div class="tab">Layout</div><div class="tab">Referenzen</div><div class="tab">Ansicht</div></div>
+    <div class="tabs"><div class="tab">Datei</div><div class="tab on">Start</div><div class="tab">Einfügen</div><div class="tab">Layout</div><div class="tab">Referenzen</div><div class="tab">Ansicht</div></div>
     <div class="rib">
-      <div class="grp hl"><div class="badge">3</div>
-        <div class="big"><div class="ico" style="font-size:40px">📋</div>Einfügen</div>
-        <div class="btnrow" style="margin-top:-4px"><div class="ib" style="width:auto;padding:0 8px;font-size:13px;gap:4px;white-space:nowrap">🖌️ Format übertr.</div></div>
-        <div class="lbl">Zwischenablage</div></div>
-      <div class="grp hl" style="margin-left:22px"><div class="badge">1</div>
-        <div class="btnrow"><div class="dd" style="width:170px">Calibri <span>▾</span></div><div class="dd" style="width:64px">11 <span>▾</span></div><div class="ib">A<sup style="font-size:10px">▲</sup></div><div class="ib">A<sub style="font-size:10px">▼</sub></div></div>
-        <div class="btnrow" style="margin-top:8px"><div class="ib" style="font-weight:900">F</div><div class="ib" style="font-style:italic;font-family:serif">K</div><div class="ib" style="text-decoration:underline">U</div><div class="ib" style="text-decoration:line-through">ab</div><div class="ib"><span style="border-bottom:5px solid #FFE600;line-height:1">ab</span></div><div class="ib"><span style="border-bottom:5px solid #E0262B;line-height:1;font-weight:700">A</span></div></div>
+      <div class="grp hl"><div class="badge">3</div><div class="big"><div class="ico" style="font-size:34px">🖌️</div>Format<br>übertragen</div><div class="lbl">Zwischenablage</div></div>
+      <div class="grp hl" style="margin-left:20px"><div class="badge">1</div>
+        <div class="btnrow"><div class="dd" style="width:130px">Calibri <span>▾</span></div><div class="dd" style="width:56px">11 <span>▾</span></div></div>
+        <div class="btnrow" style="margin-top:8px"><div class="ib" style="font-weight:700">F</div><div class="ib" style="font-style:italic">K</div><div class="ib" style="text-decoration:underline">U</div><div class="ib"><span style="border-bottom:5px solid #E0262B;line-height:1;font-weight:700">A</span></div></div>
         <div class="lbl">Schriftart</div></div>
-      <div class="grp hl" style="margin-left:22px"><div class="badge">2</div>
+      <div class="grp hl" style="margin-left:20px"><div class="badge">2</div>
         <div class="btnrow">
           <div class="ib"><svg width="20" height="16"><rect y="1" width="20" height="2.4" fill="#333"/><rect y="6.5" width="13" height="2.4" fill="#333"/><rect y="12" width="18" height="2.4" fill="#333"/></svg></div>
           <div class="ib"><svg width="20" height="16"><rect y="1" width="20" height="2.4" fill="#333"/><rect x="3.5" y="6.5" width="13" height="2.4" fill="#333"/><rect x="1" y="12" width="18" height="2.4" fill="#333"/></svg></div>
           <div class="ib"><svg width="20" height="16"><rect y="1" width="20" height="2.4" fill="#333"/><rect x="7" y="6.5" width="13" height="2.4" fill="#333"/><rect x="2" y="12" width="18" height="2.4" fill="#333"/></svg></div>
-          <div class="ib"><svg width="20" height="16"><rect y="1" width="20" height="2.4" fill="#333"/><rect y="6.5" width="20" height="2.4" fill="#333"/><rect y="12" width="20" height="2.4" fill="#333"/></svg></div>
-          <div class="ib" style="font-size:15px">↕≡</div></div>
-        <div class="btnrow" style="margin-top:8px"><div class="ib">•≡</div><div class="ib" style="font-size:15px">1≡</div><div class="ib">⇤</div><div class="ib">⇥</div><div class="ib">¶</div></div>
+          <div class="ib"><svg width="20" height="16"><rect y="1" width="20" height="2.4" fill="#333"/><rect y="6.5" width="20" height="2.4" fill="#333"/><rect y="12" width="20" height="2.4" fill="#333"/></svg></div></div>
+        <div class="btnrow" style="margin-top:8px"><div class="ib" style="font-size:16px">Zeilenabstand</div></div>
         <div class="lbl">Absatz</div></div>
-      <div class="grp" style="margin-left:22px;opacity:.55">
-        <div class="gal"><div class="st"><div class="p">AaBbCc</div><div class="n">Standard</div></div><div class="st"><div class="p" style="color:#2B579A">AaBbC</div><div class="n">Überschrift 1</div></div></div>
-        <div class="lbl">Formatvorlagen</div></div>
+      <div class="grp" style="margin-left:14px;opacity:.45"><div class="gal"><div class="st"><div class="p">AaBbCc</div><div class="n">Standard</div></div></div><div class="lbl">Formatvorlagen</div></div>
     </div>
   </div>
-  <div class="legend">
-    <div class="chip"><b>1</b>Schrift: Art, Größe, Fett, Farbe</div>
-    <div class="chip"><b>2</b>Absatz: Ausrichtung, Abstand</div>
-    <div class="chip"><b>3</b>🖌️ Format kopieren</div>
+  <div class="legend"><div class="chip"><b>1</b>Schrift</div><div class="chip"><b>2</b>Absatz</div><div class="chip"><b>3</b>Format kopieren</div></div>
+</div>
+
+<!-- ===== ZEICHEN / ABSATZ ===== -->
+<div class="fig" id="zeichen_absatz"><div class="row" style="align-items:stretch">
+  <div style="flex:1" class="col">
+    <span class="tag" style="background:#DCE8FA;color:var(--blue);align-self:flex-start">Zeichenformat</span>
+    <div class="page" style="font-size:23px;line-height:1.6;flex:1">Nur das <b style="color:#E0262B;background:#FFF2A8;padding:0 5px;border-radius:4px">markierte Wort</b> ändert sich.</div>
+    <div style="font-size:20px;color:#444">z. B. Fett, Farbe, Größe</div>
+  </div>
+  <div style="flex:1" class="col">
+    <span class="tag" style="background:#FFE7CC;color:#B85E00;align-self:flex-start">Absatzformat</span>
+    <div class="page" style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center">
+      <div class="ln" style="width:90%;background:#C8D8F0"></div><div class="ln" style="width:66%;background:#C8D8F0"></div><div class="ln" style="width:78%;background:#C8D8F0"></div>
+      <div style="font-size:19px;color:var(--blue);font-weight:700;margin-top:6px">der ganze Absatz ist zentriert</div></div>
+    <div style="font-size:20px;color:#444">z. B. Ausrichtung, Zeilenabstand</div>
+  </div>
+</div></div>
+
+<!-- ===== PINSEL ===== -->
+<div class="fig org" id="pinsel"><div class="row" style="align-items:stretch">
+  <div class="tile"><div class="e">👆</div><div class="v" style="font-size:22px">1. In den fertigen Text klicken</div></div>
+  <div class="arrow" style="align-self:center">›</div>
+  <div class="tile"><div class="e">🖌️</div><div class="v" style="font-size:22px">2. Pinsel anklicken</div></div>
+  <div class="arrow" style="align-self:center">›</div>
+  <div class="tile"><div class="e">✨</div><div class="v" style="font-size:22px">3. Über den neuen Text ziehen</div></div>
+</div></div>
+
+<!-- ===== SHORTCUTS ===== -->
+<div class="fig" id="shortcuts">
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+    <div class="sc"><div class="what">Fett</div><div><span class="key">Strg</span><span class="plus">+</span><span class="key">Umschalt</span><span class="plus">+</span><span class="key">F</span></div></div>
+    <div class="sc"><div class="what">Zentrieren</div><div><span class="key">Strg</span><span class="plus">+</span><span class="key">E</span></div></div>
+    <div class="sc"><div class="what">Kursiv</div><div><span class="key">Strg</span><span class="plus">+</span><span class="key">Umschalt</span><span class="plus">+</span><span class="key">K</span></div></div>
+    <div class="sc"><div class="what">Neue Seite</div><div><span class="key">Strg</span><span class="plus">+</span><span class="key">Enter</span></div></div>
+    <div class="sc"><div class="what">Format löschen</div><div><span class="key">Strg</span><span class="plus">+</span><span class="key">Leertaste</span></div></div>
+    <div class="sc"><div class="what">Rückgängig</div><div><span class="key">Strg</span><span class="plus">+</span><span class="key">Z</span></div></div>
   </div>
 </div>
 
-<!-- ============ ZEICHEN vs ABSATZ ============ -->
-<div class="fig" id="zeichen_absatz">
-  <div class="row" style="align-items:stretch">
-    <div style="flex:1" class="col">
-      <span class="tag" style="background:#DCE8FA;color:var(--blue);align-self:flex-start">🔤 Zeichenformat</span>
-      <div class="page" style="font-size:24px;line-height:1.7;padding:34px">
-        Nur das <b style="color:#E0262B;background:#FFF2A8;padding:0 6px;border-radius:4px">markierte Wort</b> ändert sich – der Rest bleibt gleich.
-      </div>
-      <div style="font-size:19px;color:#4a5568;font-weight:600">→ Schriftart, Größe, Fett, Farbe</div>
-    </div>
-    <div style="flex:1" class="col">
-      <span class="tag" style="background:#FFE7CC;color:#B85E00;align-self:flex-start">¶ Absatzformat</span>
-      <div class="page" style="padding:34px;text-align:center">
-        <div style="display:flex;flex-direction:column;align-items:center">
-        <div class="ln" style="width:90%;background:#C8D8F0"></div><div class="ln" style="width:70%;background:#C8D8F0"></div><div class="ln" style="width:80%;background:#C8D8F0"></div><div class="ln" style="width:50%;background:#C8D8F0"></div></div>
-        <div style="font-size:18px;color:var(--blue);font-weight:700;margin-top:10px">⟷ ganzer Absatz zentriert</div>
-      </div>
-      <div style="font-size:19px;color:#4a5568;font-weight:600">→ Ausrichtung, Zeilenabstand, Einzug</div>
-    </div>
-  </div>
-</div>
-
-<!-- ============ PINSEL ============ -->
-<div class="fig org" id="pinsel">
-  <div class="cap">🖌️ Format übertragen in 3 Schritten</div>
-  <div class="row" style="align-items:stretch">
-    <div class="tile" style="text-align:left"><div class="e">👆</div><div class="v" style="font-size:22px">1. In den fertigen Text klicken</div><div style="margin-top:14px;font-size:22px"><b style="color:#E0262B">So soll's aussehen</b></div></div>
-    <div class="arrow" style="align-self:center">›</div>
-    <div class="tile" style="text-align:left"><div class="e">🖌️</div><div class="v" style="font-size:22px">2. Pinsel anklicken</div><div style="margin-top:14px;font-size:17px;color:#666">Doppelklick = mehrmals</div></div>
-    <div class="arrow" style="align-self:center">›</div>
-    <div class="tile" style="text-align:left"><div class="e">✨</div><div class="v" style="font-size:22px">3. Über neuen Text ziehen</div><div style="margin-top:14px;font-size:22px"><b style="color:#E0262B">Fertig!</b></div></div>
-  </div>
-</div>
-
-<!-- ============ RIBBON FORMATVORLAGEN ============ -->
+<!-- ===== RIB VORLAGEN ===== -->
 <div class="fig" id="rib_vorlagen">
-  <div class="cap"><span class="num">Start</span> Formatvorlagen – ein Klick genügt</div>
   <div class="win">
-    <div class="tb"><span class="dots"><span></span><span></span><span></span></span><span class="t">Referat – Word</span></div>
-    <div class="tabs"><div class="tab">Datei</div><div class="tab on">Start</div><div class="tab">Einfügen</div><div class="tab">Entwurf</div><div class="tab">Layout</div><div class="tab">Referenzen</div><div class="tab">Ansicht</div></div>
+    <div class="tabs"><div class="tab">Datei</div><div class="tab on">Start</div><div class="tab">Einfügen</div><div class="tab">Layout</div><div class="tab">Referenzen</div><div class="tab">Ansicht</div></div>
     <div class="rib">
-      <div class="grp" style="opacity:.5"><div class="btnrow"><div class="dd" style="width:130px">Calibri ▾</div><div class="dd" style="width:56px">11 ▾</div></div><div class="btnrow" style="margin-top:8px"><div class="ib" style="font-weight:900">F</div><div class="ib"><i>K</i></div><div class="ib"><u>U</u></div></div><div class="lbl">Schriftart</div></div>
-      <div class="grp" style="flex:1;margin-left:16px">
+      <div class="grp" style="flex:1">
         <div class="gal">
           <div class="st"><div class="p">AaBbCc</div><div class="n">Standard</div></div>
-          <div class="st"><div class="p">AaBbCc</div><div class="n">Kein Leerraum</div></div>
-          <div class="st hl"><div class="badge">1</div><div class="p" style="color:#2B579A;font-weight:600">AaBbC</div><div class="n" style="color:#B85E00;font-weight:700">Überschrift 1</div></div>
-          <div class="st hl" style="margin-left:12px"><div class="badge">2</div><div class="p" style="color:#2B579A;font-size:18px">AaBbCc</div><div class="n" style="color:#B85E00;font-weight:700">Überschrift 2</div></div>
-          <div class="st" style="margin-left:12px"><div class="p" style="font-size:28px">AaB</div><div class="n">Titel</div></div>
-          <div class="st"><div class="p" style="color:#777;font-size:18px">AaBbCc</div><div class="n">Untertitel</div></div>
+          <div class="st hl" style="margin-left:6px"><div class="badge">1</div><div class="p" style="color:#2B579A;font-size:22px">AaB</div><div class="n" style="color:#B85E00;font-weight:700">Titel</div></div>
+          <div class="st hl" style="margin-left:12px"><div class="badge">2</div><div class="p" style="color:#2B579A;font-weight:700">AaBbC</div><div class="n" style="color:#B85E00;font-weight:700">Überschrift 1</div></div>
+          <div class="st hl" style="margin-left:12px"><div class="badge">3</div><div class="p" style="color:#2B579A;font-size:18px">AaBbCc</div><div class="n" style="color:#B85E00;font-weight:700">Überschrift 2</div></div>
+          <div class="st" style="margin-left:6px"><div class="p" style="font-style:italic;color:#555">AaBbCc</div><div class="n">Zitat</div></div>
+          <div class="st"><div class="p">AaBbCc</div><div class="n">Listenabsatz</div></div>
         </div>
         <div class="lbl">Formatvorlagen</div></div>
     </div>
-    <div style="padding:26px 60px 34px;background:#fff;border-radius:0 0 16px 16px;position:relative">
-      <div style="display:flex;align-items:center;gap:14px"><span style="font-size:30px;font-weight:800;color:#2B579A;border-left:4px solid #222;padding-left:6px">Einleitung</span><span class="tag" style="background:#FFE7CC;color:#B85E00">← Überschrift 1</span></div>
-      <div class="ln m"></div><div class="ln s"></div>
-      <div style="display:flex;align-items:center;gap:14px;margin-top:14px"><span style="font-size:23px;font-weight:700;color:#2B579A">Meine Hobbys</span><span class="tag" style="background:#FFE7CC;color:#B85E00">← Überschrift 2</span></div>
-      <div class="ln"></div>
+    <div style="padding:20px 40px 26px;background:#fff;border-radius:0 0 14px 14px">
+      <div style="display:flex;align-items:center;gap:12px"><span style="font-size:30px;font-weight:700;color:#2B579A">Mein Referat</span><span class="tag" style="background:#FFE7CC;color:#B85E00">1 Titel</span></div>
+      <div style="display:flex;align-items:center;gap:12px;margin-top:10px"><span style="font-size:25px;font-weight:700;color:#2B579A">Einleitung</span><span class="tag" style="background:#FFE7CC;color:#B85E00">2 Überschrift 1</span></div>
+      <div class="ln m"></div>
+      <div style="display:flex;align-items:center;gap:12px;margin-top:10px"><span style="font-size:21px;font-weight:700;color:#2B579A">Meine Hobbys</span><span class="tag" style="background:#FFE7CC;color:#B85E00">3 Überschrift 2</span></div>
+      <div class="ln"></div><div class="ln s"></div>
     </div>
   </div>
 </div>
 
-<!-- ============ OHNE / MIT ============ -->
-<div class="fig" id="ohne_mit">
-  <div class="row" style="align-items:stretch;gap:60px">
-    <div style="flex:1" class="col">
-      <span class="tag" style="background:#FDE2DD;color:var(--red);align-self:center;font-size:20px">😩 Ohne Formatvorlage</span>
-      <div class="page" style="height:380px"><div class="mark no">✗</div>
-        <div style="font-size:26px;font-weight:700;color:#1F3A5F">Einleitung</div><div class="ln"></div><div class="ln m"></div>
-        <div style="font-size:19px;font-weight:400;color:#C0392B;font-style:italic;margin-top:14px">Hauptteil</div><div class="ln"></div><div class="ln s"></div>
-        <div style="font-size:30px;font-weight:900;color:#27AE60;margin-top:12px;text-decoration:underline">FAZIT</div><div class="ln m"></div>
-        <div style="position:absolute;bottom:18px;left:0;right:0;text-align:center;color:var(--red);font-weight:700;font-size:17px">jede Überschrift anders</div>
-      </div>
+<!-- ===== OHNE / MIT ===== -->
+<div class="fig" id="ohne_mit"><div class="row" style="align-items:stretch;gap:44px">
+  <div style="flex:1" class="col">
+    <span class="tag" style="background:#FDE2DD;color:var(--red);align-self:center">Ohne Formatvorlage</span>
+    <div class="page" style="height:290px"><div class="mark no">✗</div>
+      <div style="font-size:25px;font-weight:700;color:#1F3A5F">Einleitung</div><div class="ln"></div><div class="ln m"></div>
+      <div style="font-size:19px;color:#C0392B;font-style:italic;margin-top:10px">Hauptteil</div><div class="ln"></div>
+      <div style="font-size:29px;font-weight:700;color:#27AE60;margin-top:8px;text-decoration:underline">FAZIT</div><div class="ln m"></div>
     </div>
-    <div style="flex:1" class="col">
-      <span class="tag" style="background:#D8F2E6;color:var(--green);align-self:center;font-size:20px">😎 Mit Formatvorlage</span>
-      <div class="page" style="height:380px"><div class="mark ok">✓</div>
-        <div class="h1">Einleitung</div><div class="ln"></div><div class="ln m"></div>
-        <div class="h1">Hauptteil</div><div class="ln"></div><div class="ln s"></div>
-        <div class="h1">Fazit</div><div class="ln m"></div>
-        <div style="position:absolute;bottom:18px;left:0;right:0;text-align:center;color:var(--green);font-weight:700;font-size:17px">einheitlich &amp; schnell änderbar</div>
-      </div>
+    <div style="text-align:center;color:var(--red);font-weight:700;font-size:21px">Jede Überschrift sieht anders aus</div>
+  </div>
+  <div style="flex:1" class="col">
+    <span class="tag" style="background:#D8F2E6;color:var(--green);align-self:center">Mit Formatvorlage</span>
+    <div class="page" style="height:290px"><div class="mark ok">✓</div>
+      <div class="h1" style="margin-top:0">Einleitung</div><div class="ln"></div><div class="ln m"></div>
+      <div class="h1">Hauptteil</div><div class="ln"></div>
+      <div class="h1">Fazit</div><div class="ln m"></div>
+    </div>
+    <div style="text-align:center;color:var(--green);font-weight:700;font-size:21px">Alles einheitlich – mit 1 Klick</div>
+  </div>
+</div></div>
+
+<!-- ===== ÄNDERN ===== -->
+<div class="fig" id="aendern"><div class="row" style="align-items:flex-start;gap:26px">
+  <div style="position:relative">
+    <div class="st hl" style="width:130px;height:84px"><div class="p" style="color:#2B579A;font-weight:700">AaBbC</div><div class="n" style="color:#B85E00;font-weight:700">Überschrift 1</div></div>
+    <div style="font-size:17px;color:#555;margin:10px 0 0 4px">Rechtsklick</div>
+    <div class="ctxm" style="margin:8px 0 0 30px;width:330px">
+      <div style="color:#888">Überschrift 1 aktualisieren …</div>
+      <div class="on">Ändern …</div>
+      <div style="color:#888">Alle auswählen</div>
+      <div style="color:#888">Umbenennen …</div>
     </div>
   </div>
-</div>
-
-<!-- ============ ÄNDERN (Kontextmenü) ============ -->
-<div class="fig" id="aendern">
-  <div class="cap">🖱️ Rechtsklick auf die Vorlage → „Ändern …“</div>
-  <div class="row" style="align-items:flex-start;gap:40px">
-    <div style="position:relative;padding-top:6px">
-      <div class="st hl" style="width:150px;height:96px"><div class="p" style="color:#2B579A;font-weight:600;font-size:24px">AaBbC</div><div class="n" style="color:#B85E00;font-weight:700">Überschrift 1</div></div>
-      <div class="cursor" style="left:110px;top:60px">🖱️</div>
-      <div class="ctxm" style="margin:30px 0 0 70px">
-        <div>Überschrift 1 aktualisieren, um der Auswahl zu entsprechen</div>
-        <div class="on">✏️  Ändern …</div>
-        <div>Alle auswählen</div>
-        <div>Umbenennen …</div>
-        <div style="color:#999">Aus Formatvorlagenkatalog entfernen</div>
-      </div>
+  <div class="arrow" style="margin-top:130px">→</div>
+  <div class="col" style="flex:1">
+    <div class="page">
+      <div style="font-weight:700;color:var(--navy);font-size:22px">Formatvorlage ändern</div>
+      <div class="btnrow" style="margin-top:12px"><div class="dd" style="width:130px">Calibri ▾</div><div class="dd" style="width:58px">16 ▾</div><div class="ib" style="font-weight:700">F</div><div class="ib" style="width:52px"><span style="display:inline-block;width:26px;height:15px;background:#1E7A46;border-radius:3px"></span></div></div>
+      <div style="margin-top:12px;padding:10px;border:1px dashed #ccc;border-radius:7px;font-size:24px;font-weight:700;color:#1E7A46">Einleitung</div>
+      <div style="display:flex;justify-content:flex-end;margin-top:10px"><span class="tag" style="background:var(--blue);color:#fff">OK</span></div>
     </div>
-    <div class="col" style="flex:1;margin-top:20px">
-      <div class="arrow" style="font-size:70px;line-height:.6">→</div>
-      <div class="page" style="padding:22px 26px">
-        <div style="font-weight:800;color:var(--navy);font-size:20px">Formatvorlage ändern</div>
-        <div class="btnrow" style="margin-top:16px"><div class="dd" style="width:150px">Calibri ▾</div><div class="dd" style="width:60px">16 ▾</div><div class="ib" style="font-weight:900">F</div><div class="ib" style="width:60px"><span style="display:inline-block;width:28px;height:16px;background:#1E7A46;border-radius:3px"></span></div></div>
-        <div style="margin-top:16px;padding:12px;border:1px dashed #ccc;border-radius:8px;font-size:24px;font-weight:700;color:#1E7A46">Einleitung</div>
-        <div style="display:flex;justify-content:flex-end;margin-top:14px"><span class="tag" style="background:var(--blue);color:#fff">OK</span></div>
-      </div>
-      <div class="chip" style="font-size:19px">✨ Alle Überschriften ändern sich auf einmal!</div>
-    </div>
+    <div class="chip">Alle Überschriften 1 ändern sich auf einmal</div>
   </div>
-</div>
+</div></div>
 
-<!-- ============ INHALTSVERZEICHNIS ============ -->
-<div class="fig" id="toc">
-  <div class="cap"><span class="num">Referenzen</span> Automatisches Inhaltsverzeichnis</div>
-  <div class="row" style="align-items:center;gap:34px">
-    <div class="win" style="width:520px">
-      <div class="tabs" style="border-radius:16px 16px 0 0;padding-top:8px"><div class="tab">Start</div><div class="tab">Einfügen</div><div class="tab on">Referenzen</div><div class="tab">Ansicht</div></div>
-      <div class="rib">
-        <div class="grp hl"><div class="badge">1</div><div class="big"><div class="ico"><svg width="46" height="52"><rect x="1" y="1" width="44" height="50" rx="5" fill="#fff" stroke="#2B579A" stroke-width="2"/><rect x="8" y="9" width="22" height="4" fill="#2B579A"/><rect x="8" y="19" width="30" height="3" fill="#8AA7D6"/><rect x="12" y="27" width="26" height="3" fill="#8AA7D6"/><rect x="8" y="35" width="30" height="3" fill="#8AA7D6"/><rect x="12" y="43" width="26" height="3" fill="#8AA7D6"/></svg></div>Inhalts-<br>verzeichnis ▾</div><div class="lbl">Inhaltsverzeichnis</div></div>
-        <div class="grp" style="opacity:.5"><div class="big"><div class="ico" style="font-size:36px">📝</div>Fußnote<br>einfügen</div><div class="lbl">Fußnoten</div></div>
-      </div>
-    </div>
-    <div class="arrow">→</div>
-    <div class="page" style="flex:1;padding:30px 36px"><div class="badge" style="top:-18px;right:-18px">2</div>
-      <div style="font-size:28px;font-weight:900;color:var(--navy);margin-bottom:12px">Inhalt</div>
-      <div style="font-size:20px;line-height:2.1;color:#333">
-        <div style="display:flex"><b>1 Einleitung</b><span style="flex:1;border-bottom:3px dotted #bbb;margin:0 8px 12px"></span>2</div>
-        <div style="display:flex;padding-left:28px">1.1 Meine Hobbys<span style="flex:1;border-bottom:3px dotted #bbb;margin:0 8px 12px"></span>2</div>
-        <div style="display:flex"><b>2 Hauptteil</b><span style="flex:1;border-bottom:3px dotted #bbb;margin:0 8px 12px"></span>3</div>
-        <div style="display:flex"><b>3 Fazit</b><span style="flex:1;border-bottom:3px dotted #bbb;margin:0 8px 12px"></span>5</div>
-      </div>
-      <div style="font-size:16px;color:var(--green);font-weight:700;margin-top:8px">✓ entsteht automatisch aus den Überschriften</div>
-    </div>
-  </div>
-</div>
-
-<!-- ============ NAVIGATION ============ -->
-<div class="fig" id="navi">
-  <div class="cap"><span class="num">Ansicht</span> ☑ Navigationsbereich</div>
-  <div class="win" style="display:flex;border-radius:16px;overflow:hidden">
-    <div style="width:330px;background:#F7F8FA;border-right:1px solid #ddd;padding:22px">
-      <div style="font-weight:800;font-size:20px;color:var(--navy)">Navigation</div>
-      <div class="dd" style="margin:14px 0;color:#999">🔍 Dokument durchsuchen</div>
-      <div style="font-size:18px;line-height:2.3;color:#333">
-        <div>▾ Einleitung</div><div style="padding-left:26px">Meine Hobbys</div>
-        <div style="background:#FFE7CC;border-left:5px solid var(--org);padding-left:10px;font-weight:700;color:#B85E00;border-radius:4px">▸ Hauptteil</div><div>▸ Fazit</div></div>
-    </div>
-    <div style="flex:1;padding:34px 50px;position:relative">
-      <div class="cursor" style="left:-30px;top:140px">👆</div>
-      <div class="h1" style="margin-top:0;font-size:30px">Hauptteil</div><div class="ln"></div><div class="ln m"></div><div class="ln"></div><div class="ln s"></div><div class="ln m"></div>
-      <div class="chip" style="margin-top:24px;display:inline-flex">⚡ Ein Klick links = sofort zur Stelle springen</div>
-    </div>
-  </div>
-</div>
-
-<!-- ============ KOPF/FUSS SEITE ============ -->
-<div class="fig" id="kopffuss">
-  <div class="row" style="gap:50px;align-items:center">
-    <div class="page" style="width:520px;height:640px;padding:0;overflow:visible">
-      <div style="border:3px dashed var(--org);background:#FFF6EC;border-radius:10px 10px 0 0;padding:18px 26px;display:flex;justify-content:space-between;font-size:18px;font-weight:700;color:var(--navy)"><span>Max Muster</span><span>Klasse 8b</span></div>
-      <div style="padding:26px 36px">
-        <div class="h1" style="margin-top:0">Mein Referat</div><div class="ln"></div><div class="ln m"></div><div class="ln"></div><div class="ln s"></div>
-        <div class="h2">Einleitung</div><div class="ln"></div><div class="ln m"></div><div class="ln"></div><div class="ln m"></div><div class="ln s"></div><div class="ln"></div><div class="ln m"></div>
-      </div>
-      <div style="position:absolute;bottom:0;left:0;right:0;border:3px dashed var(--blue2);background:#EEF4FD;border-radius:0 0 10px 10px;padding:16px 26px;display:flex;justify-content:space-between;font-size:17px;font-weight:700;color:var(--navy)"><span>17.11.2026</span><span>Seite 1</span></div>
-      <div class="cursor" style="right:-46px;top:20px">👈</div>
-    </div>
-    <div class="col" style="flex:1;gap:26px">
-      <div class="chip" style="background:#FFF6EC;font-size:24px;padding:20px 24px">⬆️ <span><b style="display:inline;background:none;color:var(--org);width:auto;height:auto">Kopfzeile</b><br><span style="font-weight:500;font-size:19px;color:#555">oben auf jeder Seite</span></span></div>
-      <div class="chip" style="font-size:24px;padding:20px 24px;background:#FFF">🖱️🖱️ <span>Doppelklick<br><span style="font-weight:500;font-size:19px;color:#555">in den Rand = öffnen</span></span></div>
-      <div class="chip" style="background:#EEF4FD;font-size:24px;padding:20px 24px">⬇️ <span><b style="display:inline;background:none;color:var(--blue2);width:auto;height:auto">Fußzeile</b><br><span style="font-weight:500;font-size:19px;color:#555">unten auf jeder Seite</span></span></div>
-    </div>
-  </div>
-</div>
-
-<!-- ============ RIBBON EINFÜGEN ============ -->
-<div class="fig" id="rib_einfuegen">
-  <div class="cap"><span class="num">Einfügen</span> Kopfzeile, Fußzeile &amp; Seitenzahl</div>
+<!-- ===== GLIEDERUNG ===== -->
+<div class="fig" id="gliederung">
   <div class="win">
-    <div class="tb"><span class="dots"><span></span><span></span><span></span></span><span class="t">Referat – Word</span></div>
-    <div class="tabs"><div class="tab">Datei</div><div class="tab">Start</div><div class="tab on">Einfügen</div><div class="tab">Entwurf</div><div class="tab">Layout</div><div class="tab">Referenzen</div><div class="tab">Ansicht</div></div>
+    <div class="tabs"><div class="tab">Start</div><div class="tab">Einfügen</div><div class="tab ctx">Gliederung</div><div class="tab">Ansicht</div></div>
+    <div class="rib" style="min-height:96px">
+      <div class="grp hl"><div class="badge">1</div><div class="btnrow"><div class="ib">◀</div><div class="dd" style="width:150px">Ebene 1 ▾</div><div class="ib">▶</div></div><div class="lbl">höher / tiefer stufen</div></div>
+      <div class="grp hl" style="margin-left:22px"><div class="badge">2</div><div class="btnrow"><div class="ib">▲</div><div class="ib">▼</div></div><div class="lbl">verschieben</div></div>
+      <div class="grp" style="margin-left:14px"><div class="btnrow"><div class="dd">Ebene anzeigen: Alle ▾</div></div><div class="lbl">Ansicht</div></div>
+      <div class="grp"><div class="big"><div style="width:34px;height:34px;border-radius:7px;background:#E0533D;color:#fff;font-weight:700;display:flex;align-items:center;justify-content:center">✕</div>Schließen</div></div>
+    </div>
+    <div style="padding:16px 36px 22px;background:#fff;border-radius:0 0 14px 14px;font-size:22px;line-height:1.9">
+      <div><span style="color:var(--org)">⊕</span> <b style="color:var(--navy)">Einleitung</b></div>
+      <div style="padding-left:34px"><span style="color:var(--org)">⊕</span> <b style="color:var(--blue2)">Meine Hobbys</b></div>
+      <div style="padding-left:68px;color:#888">○ Fließtext …</div>
+      <div style="background:#FFF1E2;border-radius:6px;border-left:5px solid var(--org);padding-left:6px"><span style="color:var(--org)">⊕</span> <b style="color:var(--navy)">Hauptteil</b> <span style="font-size:17px;color:#B85E00">← mit ▲▼ samt Text verschieben</span></div>
+      <div><span style="color:var(--org)">⊕</span> <b style="color:var(--navy)">Fazit</b></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== TOC ===== -->
+<div class="fig" id="toc"><div class="row" style="gap:22px">
+  <div class="win" style="width:330px">
+    <div class="tabs"><div class="tab">Start</div><div class="tab on">Referenzen</div></div>
+    <div class="rib" style="justify-content:center">
+      <div class="grp hl"><div class="badge">1</div><div class="big"><div class="ico"><svg width="42" height="48"><rect x="1" y="1" width="40" height="46" rx="5" fill="#fff" stroke="#2B579A" stroke-width="2"/><rect x="7" y="8" width="20" height="4" fill="#2B579A"/><rect x="7" y="18" width="28" height="3" fill="#8AA7D6"/><rect x="11" y="26" width="24" height="3" fill="#8AA7D6"/><rect x="7" y="34" width="28" height="3" fill="#8AA7D6"/></svg></div>Inhalts-<br>verzeichnis</div><div class="lbl">Inhaltsverzeichnis</div></div>
+    </div>
+  </div>
+  <div class="arrow">→</div>
+  <div class="page" style="flex:1"><div class="badge" style="top:-16px;right:-14px">2</div>
+    <div style="font-size:27px;font-weight:700;color:var(--navy);margin-bottom:8px">Inhalt</div>
+    <div style="font-size:21px;line-height:2;color:#333">
+      <div style="display:flex"><b>1 Einleitung</b><span style="flex:1;border-bottom:3px dotted #bbb;margin:0 8px 11px"></span>2</div>
+      <div style="display:flex;padding-left:24px">1.1 Meine Hobbys<span style="flex:1;border-bottom:3px dotted #bbb;margin:0 8px 11px"></span>2</div>
+      <div style="display:flex"><b>2 Hauptteil</b><span style="flex:1;border-bottom:3px dotted #bbb;margin:0 8px 11px"></span>3</div>
+      <div style="display:flex"><b>3 Fazit</b><span style="flex:1;border-bottom:3px dotted #bbb;margin:0 8px 11px"></span>5</div>
+    </div>
+  </div>
+</div>
+<div style="margin-top:16px;font-size:20px;color:var(--navy);font-weight:700">Word baut das Verzeichnis automatisch aus allen Überschriften.</div>
+</div>
+
+<!-- ===== KOPF/FUSS SEITE ===== -->
+<div class="fig" id="kopffuss"><div class="row" style="gap:34px">
+  <div class="page" style="width:380px;height:470px;padding:0">
+    <div style="border:3px dashed var(--org);background:#FFF6EC;border-radius:8px 8px 0 0;padding:13px 20px;display:flex;justify-content:space-between;font-size:19px;font-weight:700;color:var(--navy)"><span>Max Muster</span><span>Klasse 8b</span></div>
+    <div style="padding:18px 26px"><div class="h1" style="margin-top:0">Mein Referat</div><div class="ln"></div><div class="ln m"></div><div class="ln"></div><div class="ln s"></div><div class="h2">Einleitung</div><div class="ln"></div><div class="ln m"></div><div class="ln"></div><div class="ln s"></div></div>
+    <div style="position:absolute;bottom:0;left:0;right:0;border:3px dashed var(--blue2);background:#EEF4FD;border-radius:0 0 8px 8px;padding:12px 20px;display:flex;justify-content:space-between;font-size:18px;font-weight:700;color:var(--navy)"><span>17.11.2026</span><span>Seite 1</span></div>
+  </div>
+  <div class="col" style="flex:1;gap:18px">
+    <div class="chip" style="background:#FFF6EC;font-size:23px;padding:16px 18px;flex-direction:column;align-items:flex-start;gap:2px"><span style="color:var(--org)">Kopfzeile</span><span style="font-weight:400;font-size:19px;color:#444">steht oben auf jeder Seite</span></div>
+    <div class="chip" style="font-size:23px;padding:16px 18px;flex-direction:column;align-items:flex-start;gap:2px"><span>Doppelklick in den Rand</span><span style="font-weight:400;font-size:19px;color:#444">öffnet Kopf- oder Fußzeile</span></div>
+    <div class="chip" style="background:#EEF4FD;font-size:23px;padding:16px 18px;flex-direction:column;align-items:flex-start;gap:2px"><span style="color:var(--blue2)">Fußzeile</span><span style="font-weight:400;font-size:19px;color:#444">steht unten auf jeder Seite</span></div>
+  </div>
+</div></div>
+
+<!-- ===== RIB EINFÜGEN ===== -->
+<div class="fig" id="rib_einfuegen">
+  <div class="win">
+    <div class="tabs"><div class="tab">Datei</div><div class="tab">Start</div><div class="tab on">Einfügen</div><div class="tab">Layout</div><div class="tab">Referenzen</div><div class="tab">Ansicht</div></div>
     <div class="rib">
-      <div class="grp" style="opacity:.5"><div class="btnrow" style="gap:14px"><div class="big"><div class="ico" style="font-size:34px">📄</div>Deckblatt</div><div class="big"><div class="ico" style="font-size:34px">⤓</div>Seiten&shy;umbruch</div></div><div class="lbl">Seiten</div></div>
-      <div class="grp" style="opacity:.5"><div class="big"><div class="ico" style="font-size:34px">▦</div>Tabelle</div><div class="lbl">Tabellen</div></div>
-      <div class="grp" style="opacity:.5"><div class="btnrow" style="gap:14px"><div class="big"><div class="ico" style="font-size:34px">🖼️</div>Bilder</div><div class="big"><div class="ico" style="font-size:34px">🔷</div>Formen</div></div><div class="lbl">Illustrationen</div></div>
-      <div class="grp" style="margin-left:20px"><div class="btnrow" style="gap:22px">
-        <div class="big hl"><div class="badge">1</div><div class="ico"><svg width="44" height="54"><rect x="1" y="1" width="42" height="52" rx="5" fill="#fff" stroke="#555" stroke-width="2"/><rect x="1" y="1" width="42" height="13" rx="5" fill="#F28C28"/><rect x="7" y="22" width="30" height="3" fill="#ccc"/><rect x="7" y="30" width="26" height="3" fill="#ccc"/></svg></div>Kopfzeile ▾</div>
-        <div class="big hl"><div class="badge">2</div><div class="ico"><svg width="44" height="54"><rect x="1" y="1" width="42" height="52" rx="5" fill="#fff" stroke="#555" stroke-width="2"/><rect x="1" y="40" width="42" height="13" rx="5" fill="#3D73C4"/><rect x="7" y="10" width="30" height="3" fill="#ccc"/><rect x="7" y="18" width="26" height="3" fill="#ccc"/></svg></div>Fußzeile ▾</div>
-        <div class="big hl"><div class="badge">3</div><div class="ico"><svg width="44" height="54"><rect x="1" y="1" width="42" height="52" rx="5" fill="#fff" stroke="#555" stroke-width="2"/><circle cx="22" cy="44" r="7" fill="#2E9E6B"/><text x="22" y="48" font-size="10" fill="#fff" text-anchor="middle" font-weight="700">#</text><rect x="7" y="10" width="30" height="3" fill="#ccc"/><rect x="7" y="18" width="26" height="3" fill="#ccc"/></svg></div>Seitenzahl ▾</div>
+      <div class="grp" style="opacity:.45"><div class="big"><div class="ico" style="font-size:30px">▦</div>Tabelle</div><div class="lbl">Tabellen</div></div>
+      <div class="grp" style="opacity:.45"><div class="big"><div class="ico" style="font-size:30px">🖼️</div>Bilder</div><div class="lbl">Illustrationen</div></div>
+      <div class="grp" style="margin-left:18px"><div class="btnrow" style="gap:20px">
+        <div class="big hl"><div class="badge">1</div><div class="ico"><svg width="40" height="50"><rect x="1" y="1" width="38" height="48" rx="5" fill="#fff" stroke="#555" stroke-width="2"/><rect x="1" y="1" width="38" height="12" rx="5" fill="#F28C28"/><rect x="7" y="20" width="26" height="3" fill="#ccc"/><rect x="7" y="28" width="22" height="3" fill="#ccc"/></svg></div>Kopfzeile</div>
+        <div class="big hl"><div class="badge">2</div><div class="ico"><svg width="40" height="50"><rect x="1" y="1" width="38" height="48" rx="5" fill="#fff" stroke="#555" stroke-width="2"/><rect x="1" y="37" width="38" height="12" rx="5" fill="#3D73C4"/><rect x="7" y="9" width="26" height="3" fill="#ccc"/><rect x="7" y="17" width="22" height="3" fill="#ccc"/></svg></div>Fußzeile</div>
+        <div class="big hl"><div class="badge">3</div><div class="ico"><svg width="40" height="50"><rect x="1" y="1" width="38" height="48" rx="5" fill="#fff" stroke="#555" stroke-width="2"/><circle cx="20" cy="40" r="7" fill="#2E9E6B"/><text x="20" y="44" font-size="10" fill="#fff" text-anchor="middle" font-weight="700">1</text><rect x="7" y="9" width="26" height="3" fill="#ccc"/><rect x="7" y="17" width="22" height="3" fill="#ccc"/></svg></div>Seitenzahl</div>
       </div><div class="lbl">Kopf- und Fußzeile</div></div>
     </div>
   </div>
-  <div class="legend">
-    <div class="chip"><b>1</b>Kopfzeile → „Leer“</div>
-    <div class="chip"><b>2</b>Fußzeile → „Leer“</div>
-    <div class="chip"><b>3</b>Seitenzahl → Seitenende</div>
-  </div>
+  <div class="legend"><div class="chip"><b>1</b>Kopfzeile: „Leer“</div><div class="chip"><b>2</b>Fußzeile: „Leer“</div><div class="chip"><b>3</b>Seitenzahl: „Seitenende“</div></div>
 </div>
 
-<!-- ============ ERSTE SEITE ANDERS ============ -->
+<!-- ===== ERSTE SEITE ===== -->
 <div class="fig" id="erste_seite">
-  <div class="cap"><span class="num" style="background:#B85E00">Kopf- und Fußzeile</span> erscheint, sobald ihr im Rand seid</div>
   <div class="win">
-    <div class="tabs" style="border-radius:16px 16px 0 0;padding-top:8px"><div class="tab">Start</div><div class="tab">Einfügen</div><div class="tab">Layout</div><div class="tab ctx">Kopf- und Fußzeile</div></div>
+    <div class="tabs"><div class="tab">Start</div><div class="tab">Einfügen</div><div class="tab ctx">Kopf- und Fußzeile</div></div>
     <div class="rib">
-      <div class="grp hl"><div class="badge">1</div><div class="big"><div class="ico"><div style="width:46px;height:46px;margin:0 auto;border-radius:7px;background:#fff;box-shadow:0 3px 8px rgba(0,0,0,.15);overflow:hidden;display:flex;flex-direction:column"><div style="background:#E0533D;color:#fff;font-weight:800;font-size:10px;text-align:center;line-height:1.5">NOV</div><div style="flex:1;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:20px;color:#1d2433">17</div></div></div>Datum und<br>Uhrzeit</div><div class="lbl">Einfügen</div></div>
-      <div class="grp hl" style="margin-left:24px;padding-right:24px"><div class="badge">2</div>
-        <div style="font-size:16px;line-height:2;color:#333">
-          <div style="font-weight:800;color:#B85E00;font-size:17px">☑ Erste Seite anders</div>
-          <div>☐ Untersch. gerade und ungerade Seiten</div>
-          <div>☑ Dokumenttext anzeigen</div></div>
+      <div class="grp hl"><div class="badge">1</div><div class="big"><div class="ico"><div style="width:42px;height:42px;border-radius:7px;background:#fff;box-shadow:0 2px 5px rgba(0,0,0,.2);overflow:hidden;display:flex;flex-direction:column"><div style="background:#E0533D;color:#fff;font-size:11px;font-weight:700;line-height:1.5">NOV</div><div style="flex:1;font-weight:700;font-size:19px;display:flex;align-items:center;justify-content:center">17</div></div></div>Datum und<br>Uhrzeit</div><div class="lbl">Einfügen</div></div>
+      <div class="grp hl" style="margin-left:22px;padding-right:20px"><div class="badge">2</div>
+        <div style="font-size:19px;line-height:1.9;color:#333"><div style="font-weight:700;color:#B85E00">☑ Erste Seite anders</div><div>☐ Gerade/ungerade Seiten anders</div><div style="font-weight:700;color:#B85E00">☐ Mit vorheriger verknüpfen</div></div>
         <div class="lbl">Optionen</div></div>
-      <div class="grp" style="margin-left:24px"><div class="big hl"><div class="badge">3</div><div class="ico"><div style="width:50px;height:50px;border-radius:10px;background:#E0533D;color:#fff;font-size:34px;font-weight:900;display:flex;align-items:center;justify-content:center">✕</div></div>Kopf- und Fußzeile<br>schließen</div><div class="lbl">Schließen</div></div>
+      <div class="grp" style="margin-left:22px"><div class="big hl"><div class="badge">3</div><div class="ico"><div style="width:44px;height:44px;border-radius:8px;background:#E0533D;color:#fff;font-size:28px;font-weight:700;display:flex;align-items:center;justify-content:center">✕</div></div>Schließen</div><div class="lbl">Schließen</div></div>
     </div>
   </div>
-  <div class="legend">
-    <div class="chip"><b>1</b>Datum einfügen</div>
-    <div class="chip"><b>2</b>📕 Deckblatt ohne Kopfzeile</div>
-    <div class="chip"><b>3</b>✕ Zurück zum Text</div>
-  </div>
+  <div class="legend"><div class="chip"><b>1</b>Datum einfügen</div><div class="chip"><b>2</b>Deckblatt ohne Kopfzeile</div><div class="chip"><b>3</b>Zurück zum Text</div></div>
 </div>
 
-<!-- ============ SHORTCUTS ============ -->
-<div class="fig" id="shortcuts">
-  <div class="cap">⌨️ Die besten Tastenkürzel</div>
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:22px">
-    <div class="sc"><div class="what">𝐅 Fett</div><div><span class="key">Strg</span><span class="plus">+</span><span class="key">⇧</span><span class="plus">+</span><span class="key">F</span></div></div>
-    <div class="sc"><div class="what">≡ Zentrieren</div><div><span class="key">Strg</span><span class="plus">+</span><span class="key">E</span></div></div>
-    <div class="sc"><div class="what">𝘒 Kursiv</div><div><span class="key">Strg</span><span class="plus">+</span><span class="key">⇧</span><span class="plus">+</span><span class="key">K</span></div></div>
-    <div class="sc"><div class="what">⤓ Neue Seite</div><div><span class="key">Strg</span><span class="plus">+</span><span class="key">Enter ↵</span></div></div>
-    <div class="sc"><div class="what">🧽 Format löschen</div><div><span class="key">Strg</span><span class="plus">+</span><span class="key">Leertaste</span></div></div>
-    <div class="sc"><div class="what">↩️ Rückgängig</div><div><span class="key">Strg</span><span class="plus">+</span><span class="key">Z</span></div></div>
-  </div>
-  <div style="margin-top:20px;font-size:17px;color:#6b778c">⇧ = Umschalt-Taste (Shift)</div>
-</div>
-
-<!-- ============ ZIEL ÜBUNG (Steckbrief) ============ -->
-<div class="fig org" id="ziel">
-  <div class="cap">🎯 So soll euer Ergebnis aussehen</div>
-  <div class="row" style="gap:36px;align-items:flex-start;justify-content:center">
-    <div class="page" style="width:330px;height:440px;padding:0">
-      <div style="height:30px"></div>
-      <div style="text-align:center;margin-top:120px"><div style="font-size:34px;font-weight:900;color:var(--navy)">Mein Steckbrief</div><div style="color:#777;font-size:16px;margin-top:6px">Titel · Seite 1</div></div>
-      <div style="position:absolute;bottom:14px;left:0;right:0;text-align:center;font-size:14px;color:var(--green);font-weight:700">✓ ohne Kopf-/Fußzeile</div>
-    </div>
-    <div class="page" style="width:330px;height:440px;padding:0">
-      <div style="background:#FFF6EC;border-bottom:2px dashed var(--org);padding:10px 16px;display:flex;justify-content:space-between;font-size:13px;font-weight:700;color:var(--navy)"><span>Max Muster</span><span>8b</span></div>
-      <div style="padding:16px 22px">
-        <div style="font-weight:900;color:var(--navy);font-size:19px">Inhalt</div>
-        <div style="font-size:13px;color:#555;line-height:1.9">1 Über mich ······· 2<br>2 Hobbys ··········· 2<br>3 Traumberuf ······ 3</div>
+<!-- ===== ABSCHNITTE (Seitenformatierung) ===== -->
+<div class="fig" id="abschnitte">
+  <div class="row" style="align-items:flex-start;gap:24px">
+    <div class="win" style="width:330px">
+      <div class="tabs"><div class="tab">Start</div><div class="tab on">Layout</div></div>
+      <div class="rib" style="flex-direction:column;gap:12px;min-height:0;padding:14px">
+        <div class="btnrow" style="gap:12px">
+          <div class="big hl"><div class="badge">1</div><div class="ico" style="font-size:28px">⤓</div>Umbrüche</div>
+          <div class="big hl" style="margin-left:10px"><div class="badge">2</div><div class="ico"><svg width="44" height="40"><rect x="2" y="6" width="22" height="30" rx="3" fill="#fff" stroke="#555" stroke-width="2"/><rect x="16" y="14" width="26" height="20" rx="3" fill="#FFE7CC" stroke="#F28C28" stroke-width="2"/></svg></div>Ausrichtung</div>
+        </div>
+        <div class="ctxm" style="width:100%;font-size:17px">
+          <div style="color:#888;font-size:15px">Abschnittsumbrüche</div>
+          <div class="on">Nächste Seite</div>
+          <div style="color:#888">Fortlaufend</div>
+        </div>
       </div>
-      <div style="position:absolute;bottom:0;left:0;right:0;background:#EEF4FD;border-top:2px dashed var(--blue2);padding:8px;text-align:center;font-size:13px;font-weight:700;color:var(--navy)">Seite 2</div>
     </div>
-    <div class="page" style="width:330px;height:440px;padding:0">
-      <div style="background:#FFF6EC;border-bottom:2px dashed var(--org);padding:10px 16px;display:flex;justify-content:space-between;font-size:13px;font-weight:700;color:var(--navy)"><span>Max Muster</span><span>8b</span></div>
-      <div style="padding:10px 22px">
-        <div class="h1" style="font-size:19px;margin-top:6px">1 Über mich</div><div class="ln"></div><div class="ln s"></div>
-        <div class="h1" style="font-size:19px">2 Hobbys</div><div class="ln m"></div><div class="ln"></div>
-        <div class="h1" style="font-size:19px">3 Traumberuf</div><div class="ln"></div><div class="ln s"></div>
+    <div class="col" style="flex:1;gap:10px">
+      <div class="row" style="gap:16px;align-items:flex-end">
+        <div class="page" style="width:150px;height:200px;padding:0"><div style="background:#FFF6EC;border-bottom:2px dashed var(--org);font-size:13px;padding:5px 8px;font-weight:700">Kopfzeile A</div><div style="padding:8px 12px"><div class="ln"></div><div class="ln m"></div><div class="ln s"></div></div></div>
+        <div style="width:4px;height:200px;background:repeating-linear-gradient(var(--org) 0 8px,transparent 8px 14px)"></div>
+        <div class="page" style="width:240px;height:160px;padding:0;background:#FFFDF9"><div style="background:#EEF4FD;border-bottom:2px dashed var(--blue2);font-size:13px;padding:5px 8px;font-weight:700">Kopfzeile B</div><div style="padding:8px 12px"><div class="ln"></div><div class="ln m"></div></div></div>
       </div>
-      <div style="position:absolute;bottom:0;left:0;right:0;background:#EEF4FD;border-top:2px dashed var(--blue2);padding:8px;text-align:center;font-size:13px;font-weight:700;color:var(--navy)">Seite 3</div>
+      <div class="row" style="gap:16px;font-size:18px;font-weight:700"><span style="width:150px;text-align:center;color:var(--navy)">Abschnitt 1<br><span style="font-weight:400;color:#555">Hochformat</span></span><span style="width:4px"></span><span style="width:240px;text-align:center;color:var(--navy)">Abschnitt 2<br><span style="font-weight:400;color:#555">Querformat</span></span></div>
     </div>
   </div>
+  <div class="legend"><div class="chip"><b>1</b>Umbrüche: „Nächste Seite“</div><div class="chip"><b>2</b>Ausrichtung: „Querformat“</div></div>
 </div>
 
-<!-- ============ GOLDENE REGELN ============ -->
-<div class="fig org" id="regeln">
-  <div class="cap">🏆 Die 4 goldenen Regeln</div>
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px">
-    <div class="rule"><span class="e">⚡</span>Überschriften immer mit Formatvorlage</div>
-    <div class="rule"><span class="e">🔢</span>Seitenzahl nie von Hand tippen</div>
-    <div class="rule"><span class="e">⤓</span>Neue Seite: Strg + Enter</div>
-    <div class="rule"><span class="e">🎨</span>Wenige Farben &amp; Schriften</div>
+<!-- ===== DOKUMENTVORLAGE (Erklärung) ===== -->
+<div class="fig org" id="dokvorlage"><div class="row" style="gap:20px;justify-content:center">
+  <div class="col" style="align-items:center;gap:8px">
+    <div class="page" style="width:150px;height:190px;padding:10px 14px;border:4px solid var(--org)">
+      <div style="background:#FFE1C2;height:10px;border-radius:3px"></div><div class="h1" style="font-size:16px">Titel</div><div class="ln"></div><div class="ln s"></div><div style="font-size:12px;color:#888;margin-top:20px">Seite 1</div>
+      <div style="position:absolute;bottom:-14px;left:50%;transform:translateX(-50%);background:var(--org);color:#fff;font-weight:700;font-size:17px;padding:2px 12px;border-radius:999px">.dotx</div></div>
+    <div style="font-weight:700;color:var(--navy);font-size:21px;margin-top:10px">Vorlage</div>
+    <div class="small" style="font-size:17px">einmal gebaut</div>
+  </div>
+  <div class="arrow" style="font-size:64px">→</div>
+  <div class="row" style="gap:12px">
+    <div class="col" style="align-items:center;gap:8px"><div class="page" style="width:120px;height:160px;padding:8px 12px"><div style="background:#FFE1C2;height:8px;border-radius:3px"></div><div class="h1" style="font-size:14px">Referat</div><div class="ln"></div><div class="ln s"></div></div><div style="font-weight:700;color:var(--navy);font-size:18px">Doku 1</div></div>
+    <div class="col" style="align-items:center;gap:8px"><div class="page" style="width:120px;height:160px;padding:8px 12px"><div style="background:#FFE1C2;height:8px;border-radius:3px"></div><div class="h1" style="font-size:14px">Projekt</div><div class="ln"></div><div class="ln s"></div></div><div style="font-weight:700;color:var(--navy);font-size:18px">Doku 2</div></div>
+    <div class="col" style="align-items:center;gap:8px"><div class="page" style="width:120px;height:160px;padding:8px 12px"><div style="background:#FFE1C2;height:8px;border-radius:3px"></div><div class="h1" style="font-size:14px">Bericht</div><div class="ln"></div><div class="ln s"></div></div><div style="font-weight:700;color:var(--navy);font-size:18px">Doku 3</div></div>
   </div>
 </div>
-
-<!-- ============ SIEGEL ============ -->
-<div class="fig plain" id="siegel" style="width:420px">
-  <div style="width:380px;height:380px;border-radius:50%;margin:auto;background:radial-gradient(circle at 35% 30%,#FFD27A,#F28C28 60%,#C96A0E);display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;box-shadow:0 18px 40px rgba(201,106,14,.45),inset 0 0 0 14px rgba(255,255,255,.35)">
-    <div style="font-size:90px">🏅</div>
-    <div style="font-weight:900;font-size:34px;letter-spacing:.05em">ERFOLGREICH</div>
-    <div style="font-weight:700;font-size:22px;opacity:.95">teilgenommen</div>
-  </div>
+<div style="text-align:center;margin-top:16px;font-size:21px;font-weight:700;color:var(--navy)">Jedes neue Dokument hat sofort Deckblatt, Kopfzeile und Formatvorlagen.</div>
 </div>
 
-<!-- ============ SMILEYS ============ -->
-<div class="fig plain" id="smileys" style="width:1200px">
-  <div style="display:flex;justify-content:space-around;font-size:64px">
-    <div style="text-align:center">😃<div style="font-size:20px;font-weight:700;color:var(--navy)">super</div></div>
-    <div style="text-align:center">🙂<div style="font-size:20px;font-weight:700;color:var(--navy)">gut</div></div>
-    <div style="text-align:center">😐<div style="font-size:20px;font-weight:700;color:var(--navy)">okay</div></div>
-    <div style="text-align:center">🙁<div style="font-size:20px;font-weight:700;color:var(--navy)">eher nicht</div></div>
-    <div style="text-align:center">😞<div style="font-size:20px;font-weight:700;color:var(--navy)">gar nicht</div></div>
+<!-- ===== DOTX SPEICHERN ===== -->
+<div class="fig" id="dotx">
+  <div class="win" style="max-width:700px;margin:0 auto">
+    <div class="tabs" style="justify-content:space-between"><div class="tab on">Speichern unter</div><div class="tab">✕</div></div>
+    <div style="padding:22px 28px;background:#F7F8FA;border-radius:0 0 14px 14px;font-size:20px">
+      <div class="row" style="gap:14px"><span style="width:120px;color:#555">Dateiname:</span><div class="dd" style="flex:1;background:#fff">Projektdoku-Vorlage</div></div>
+      <div class="row" style="gap:14px;margin-top:14px;position:relative"><span style="width:120px;color:#555">Dateityp:</span><div class="dd hl" style="flex:1;font-weight:700;color:#B85E00">Word-Vorlage (*.dotx) <span>▾</span></div><div class="badge" style="top:-18px;right:-14px">1</div></div>
+      <div style="display:flex;justify-content:flex-end;margin-top:20px;position:relative"><span class="tag" style="background:var(--blue);color:#fff;outline:4px solid var(--org);outline-offset:3px">Speichern</span><div class="badge" style="top:-22px;right:-14px">2</div></div>
+    </div>
   </div>
+  <div class="legend" style="justify-content:center"><div class="chip">Benutzen: Doppelklick auf die .dotx-Datei öffnet ein neues Dokument</div></div>
 </div>
 
+<!-- ===== ZIEL ===== -->
+<div class="fig org" id="ziel"><div class="row" style="gap:22px;justify-content:center;align-items:flex-start">
+  <div class="col" style="align-items:center;gap:8px"><div class="page" style="width:240px;height:320px;padding:0"><div style="text-align:center;margin-top:110px"><div style="font-size:28px;font-weight:700;color:var(--navy)">Mein Steckbrief</div></div></div><div style="font-weight:700;color:var(--navy)">Seite 1: Deckblatt</div><div class="small">ohne Kopf- und Fußzeile</div></div>
+  <div class="col" style="align-items:center;gap:8px"><div class="page" style="width:240px;height:320px;padding:0">
+    <div style="background:#FFF6EC;border-bottom:2px dashed var(--org);padding:7px 12px;display:flex;justify-content:space-between;font-size:15px;font-weight:700;color:var(--navy)"><span>Max Muster</span><span>8b</span></div>
+    <div style="padding:12px 16px"><div style="font-weight:700;color:var(--navy);font-size:20px">Inhalt</div><div style="font-size:15px;color:#444;line-height:1.9">1 Über mich ........ 3<br>2 Hobbys ........... 3<br>3 Traumberuf ....... 3</div></div>
+    <div style="position:absolute;bottom:0;left:0;right:0;background:#EEF4FD;border-top:2px dashed var(--blue2);padding:6px;text-align:center;font-size:15px;font-weight:700">Seite 2</div></div><div style="font-weight:700;color:var(--navy)">Seite 2: Inhalt</div><div class="small">automatisch</div></div>
+  <div class="col" style="align-items:center;gap:8px"><div class="page" style="width:240px;height:320px;padding:0">
+    <div style="background:#FFF6EC;border-bottom:2px dashed var(--org);padding:7px 12px;display:flex;justify-content:space-between;font-size:15px;font-weight:700;color:var(--navy)"><span>Max Muster</span><span>8b</span></div>
+    <div style="padding:6px 16px"><div class="h1" style="font-size:19px">1 Über mich</div><div class="ln"></div><div class="h1" style="font-size:19px">2 Hobbys</div><div class="ln m"></div><div class="h1" style="font-size:19px">3 Traumberuf</div><div class="ln"></div></div>
+    <div style="position:absolute;bottom:0;left:0;right:0;background:#EEF4FD;border-top:2px dashed var(--blue2);padding:6px;text-align:center;font-size:15px;font-weight:700">Seite 3</div></div><div style="font-weight:700;color:var(--navy)">Seite 3: Text</div><div class="small">mit Überschriften</div></div>
+</div></div>
+
+<!-- ===== REGELN ===== -->
+<div class="fig org" id="regeln"><div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+  <div class="rule"><span class="n">1</span>Überschriften immer mit Formatvorlage</div>
+  <div class="rule"><span class="n">2</span>Seitenzahl nie selbst tippen</div>
+  <div class="rule"><span class="n">3</span>Neue Seite mit Strg + Enter</div>
+  <div class="rule"><span class="n">4</span>Wenige Farben und Schriften</div>
+</div></div>
+
+<!-- ===== SIEGEL ===== -->
+<div class="fig plain" id="siegel" style="width:340px">
+  <div style="width:310px;height:310px;border-radius:50%;margin:auto;background:radial-gradient(circle at 35% 30%,#FFD27A,#F28C28 60%,#C96A0E);display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;box-shadow:0 14px 32px rgba(201,106,14,.4),inset 0 0 0 12px rgba(255,255,255,.35)">
+    <div style="font-size:74px">🏅</div><div style="font-weight:700;font-size:30px;letter-spacing:.05em">ERFOLGREICH</div><div style="font-size:22px">teilgenommen</div>
+  </div>
+</div>
 </body></html>
