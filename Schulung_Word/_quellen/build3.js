@@ -170,19 +170,24 @@ await save("02_Schulungsblatt", [sec("Schulungsblatt", [
   pb(),
 
   H1("Jetzt seid ihr dran"),
-  P([r("Öffnet die Datei ", { size: 24 }), r("04_Uebungsdatei_Steckbrief", { bold: true, size: 24 }), r(". Ihr habt 4 Minuten. Arbeitet in Gruppen (3–5 Personen) und hakt ab:", { size: 24 })]),
+  P([r("Öffnet die Datei ", { size: 24 }), r("04_Uebungsdatei_Steckbrief", { bold: true, size: 24 }), r(". Ihr habt 25 Minuten. Arbeitet in Gruppen (3–5 Personen) und hakt ab:", { size: 24 })]),
   check("„Mein Steckbrief“ bekommt die Vorlage „Titel“."),
   check("Über mich, Hobbys, Traumberuf bekommen „Überschrift 1“."),
+  check("„Überschrift 1“ ändern: eine neue Farbe."),
+  check("In der Gliederung „Traumberuf“ nach oben schieben."),
+  check("Nach dem Titel: Strg + Enter, Inhaltsverzeichnis, wieder Strg + Enter."),
   check("Kopfzeile: euren Namen eintragen. Fußzeile: Seitenzahl."),
-  check("Nach dem Titel: Strg + Enter und Inhaltsverzeichnis einfügen."),
-  P([r("Schnell fertig? Bonus: „Überschrift 1“ umfärben, Gliederung ausprobieren, als .dotx speichern.", { italics: true, color: GREY, size: 22 })], { spacing: { before: 120 } }),
+  check("„Erste Seite anders“ anhaken."),
+  check("Als Word-Vorlage (.dotx) speichern."),
   H2("So soll es am Ende aussehen"),
   img("ziel", 600),
   pb(),
   H1("Quiz"),
   ...steps([
+    "Ist „zentriert“ ein Zeichenformat oder ein Absatzformat?",
     "Warum braucht ein Inhaltsverzeichnis Formatvorlagen?",
     "Wie öffnet ihr die Kopfzeile am schnellsten?",
+    "Wozu ist eine Dokumentvorlage (.dotx) gut?",
   ], 25),
   img("regeln", WPX, { before: 300 }),
 ])]);
@@ -254,7 +259,7 @@ await save("06_Teilnahmebescheinigung", [sec(null, [
   P([r("Hiermit bestätigen wir, dass", { size: 26 })], { alignment: C }),
   new Paragraph({ alignment: C, spacing: { before: 600, after: 60 }, indent: { left: 1500, right: 1500 }, border: { bottom: { style: BorderStyle.SINGLE, size: 6, color: NAVY, space: 1 } }, children: [] }),
   P([r("Name, Klasse", { size: 18, color: GREY })], { alignment: C, spacing: { after: 400 } }),
-  P([r("am 17. November 2026 an der 20-minütigen", { size: 26 })], { alignment: C }),
+  P([r("am 17. November 2026 (09:15 – 10:45 Uhr) an der", { size: 26 })], { alignment: C }),
   P([r("Word-Schulung", { bold: true, color: NAVY, size: 52 })], { alignment: C, spacing: { before: 160, after: 60 } }),
   P([r("Formate · Formatvorlagen · Kopf- und Fußzeile · Dokumentvorlagen", { color: GREY, size: 24 })], { alignment: C, spacing: { after: 200 } }),
   P([r("erfolgreich teilgenommen hat.", { size: 26 })], { alignment: C, spacing: { after: 400 } }),
@@ -264,16 +269,16 @@ await save("06_Teilnahmebescheinigung", [sec(null, [
 
 // =========================== 00 ABLAUFPLAN ===========================
 await save("00_Ablaufplan_intern", [sec("Ablaufplan (intern)", [
-  img("ban_ablauf", WPX, { before: 0, after: 100 }),
+  img("ban_ablauf", 520, { before: 0, after: 40 }),
   H1("Wer macht was?"),
-  table([1600, 2100, 4806, 1700], ["Zeit", "Teil", "Was passiert", "Wer"], [
-    ["08:30 (2 min)", "Start", "Begrüßen, Ablauf zeigen, kurz Fragen sammeln", "Yannik"],
-    ["08:32 (3 min)", "Formate", "Live zeigen: Schrift, Absatz, Pinsel", "Nico"],
-    ["08:35 (4 min)", "Formatvorlagen", "Vorlage anwenden und ändern, Gliederung und Inhaltsverzeichnis kurz zeigen", "Yannik"],
-    ["08:39 (3 min)", "Seiten, Kopf und Fuß", "Kopf-/Fußzeile, Seitenzahl, Querformat kurz zeigen", "Nico"],
-    ["08:42 (2 min)", "Eigene Vorlage", "Als .dotx speichern und neu öffnen", "Yannik"],
-    ["08:44 (4 min)", "Üben", "Steckbrief: 4 Aufgaben in Gruppen, wir helfen", "Beide"],
-    ["08:48 (2 min)", "Quiz und Ende", "2 Quizfragen, Handout, Feedback, Bescheinigung", "Beide"],
+  table([1900, 2100, 4706, 1500], ["Zeit", "Teil", "Was passiert", "Wer"], [
+    ["09:15 (10 min)", "Start", "Begrüßen, Ablauf zeigen, Fragen sammeln", "Yannik"],
+    ["09:25 (10 min)", "Formate", "Live zeigen: Schrift, Absatz, Pinsel", "Nico"],
+    ["09:35 (20 min)", "Formatvorlagen", "Vorlage anwenden und ändern, Gliederung, Inhaltsverzeichnis", "Yannik"],
+    ["09:55 (10 min)", "Seiten, Kopf und Fuß", "Kopf-/Fußzeile, Seitenzahl, Abschnitt mit Querformat", "Nico"],
+    ["10:05 (5 min)", "Eigene Vorlage", "Als .dotx speichern und neu öffnen", "Yannik"],
+    ["10:10 (25 min)", "Üben", "Steckbrief in Gruppen (3–5), wir helfen", "Beide"],
+    ["10:35 (10 min)", "Quiz und Ende", "Quiz, Handout, Feedback, Bescheinigung", "Beide"],
   ], { boldFirst: true }),
   H1("Checkliste"),
   check("Einladung aufgehängt, Anmeldungen gezählt"),
@@ -283,7 +288,6 @@ await save("00_Ablaufplan_intern", [sec("Ablaufplan (intern)", [
   check("Einmal komplett geprobt (mit Uhr)"),
   box([[r("Tipps: ", { bold: true }), r("frei sprechen · langsam klicken und ansagen · Fragen stellen · Handout erst am Ende austeilen")]], BLUEBG, NAVY),
   H1("Quiz-Lösungen"),
-  ...steps(["Word erkennt Überschriften nur an der Formatvorlage.", "Doppelklick in den oberen Seitenrand."], 23),
-  box([[r("Zeit knapp? ", { bold: true }), r("Bei 20 Minuten nur zeigen, nicht erklären. Gliederung und Querformat notfalls weglassen – sie stehen im Handout.")]], ORGBG, ACCENT),
+  ...steps(["Absatzformat – gilt für den ganzen Absatz.", "Word erkennt Überschriften nur an der Formatvorlage.", "Doppelklick in den oberen Seitenrand.", "Jedes neue Dokument ist sofort fertig eingerichtet."], 23),
 ])]);
 })();
