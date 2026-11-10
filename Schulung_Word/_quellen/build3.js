@@ -69,6 +69,7 @@ const styles = {
   ],
 };
 const numbering = { config: [
+  { reference: "dot", levels: [{ level: 0, format: LevelFormat.BULLET, text: "\u2022", alignment: AlignmentType.LEFT, style: { run: { color: ACCENT }, paragraph: { indent: { left: 220, hanging: 180 } } } }] },
   { reference: "chk", levels: [{ level: 0, format: LevelFormat.BULLET, text: "☐", alignment: AlignmentType.LEFT, style: { run: { font: "Segoe UI Symbol", size: 28, color: NAVY }, paragraph: { indent: { left: 520, hanging: 400 } } } }] },
   ...Array.from({ length: 30 }, (_, i) => ({ reference: "n" + i, levels: [{ level: 0, format: LevelFormat.DECIMAL, text: "%1.", alignment: AlignmentType.LEFT,
     style: { run: { font: FONT, bold: true, color: ACCENT, size: 24 }, paragraph: { indent: { left: 460, hanging: 360 } } } }] })),
@@ -257,6 +258,44 @@ await save("04_Aufgaben_Fussball", [sec("Aufgaben", [
   box([[r("Bonus: ", { bold: true, size: 23 }), r("Setzt das Kapitel „Zahlen und Rekorde“ auf eine eigene Seite im Querformat.", { size: 23 })],
        [r("Layout › Umbrüche › Nächste Seite  ·  Layout › Ausrichtung › Querformat", { size: 20, color: GREY })]]),
 ])]);
+
+// =========================== SCHULUNGSKONZEPT ===========================
+{
+  const dot = (t) => new Paragraph({ numbering: { reference: "dot", level: 0 }, spacing: { after: 20, line: 250, lineRule: "auto" }, children: runs(t, { size: 19 }) });
+  const cw = [520, 1100, 1900, 3900, 950, 1836];
+  const hc = (t, w) => cell(t, w, { fill: NAVY, run: { bold: true, color: "FFFFFF", size: 19 } });
+  const tc = (c, w, o = {}) => cell(c, w, { valign: VerticalAlign.TOP, margins: { top: 70, bottom: 70, left: 90, right: 90 }, ...o });
+  const pp = (t, o = {}) => [new Paragraph({ spacing: { after: 0 }, children: runs(t, { size: 19, ...o }) })];
+  const row = (nr, zeit, schritt, punkte, wer, mat, fill) => new TableRow({ cantSplit: true, children: [
+    tc(pp(nr, { bold: true, color: ACCENT, size: 22 }), cw[0], { fill }), tc(pp(zeit, { bold: true, color: NAVY }), cw[1], { fill }),
+    tc(pp(schritt, { bold: true, color: NAVY }), cw[2], { fill }), tc(punkte.map(dot), cw[3], { fill }),
+    tc(pp(wer), cw[4], { fill }), tc(pp(mat, { color: GREY }), cw[5], { fill }) ] });
+  const LB = "F6F8FB";
+  const meta = (k, v) => P([r(k + ": ", { bold: true, color: NAVY, size: 20 }), r(v, { size: 20 })], { spacing: { after: 20 } });
+  const konzept = [
+    P([r("SCHULUNGSKONZEPT", { bold: true, color: ACCENT, size: 20 })], { spacing: { after: 20 } }),
+    P([r("Word-Schulung: Formate, Inhaltsverzeichnis, Kopf- und Fußzeile", { bold: true, color: NAVY, size: 32 })], { spacing: { after: 100 } }),
+    new Table({ width: { size: W, type: WidthType.DXA }, columnWidths: [W / 2, W / 2], rows: [new TableRow({ children: [
+      new TableCell({ width: { size: W / 2, type: WidthType.DXA }, borders: nb, children: [meta("Team", "„Die Allrounder“ (Nico und Yannik)"), meta("Zielgruppe", "Schülerinnen und Schüler der Mittelstufe"), meta("Gruppen", "3–5 Personen pro PC")] }),
+      new TableCell({ width: { size: W / 2, type: WidthType.DXA }, borders: nb, children: [meta("Termin", "Dienstag, 17.11.2026"), meta("Ort", "Raum 0.68"), meta("Dauer", "20 Minuten (Begrüßung bis Verabschiedung)")] }),
+    ] })] }),
+    P([r("Ziel: ", { bold: true, color: NAVY, size: 20 }), r("Die Teilnehmenden können Text formatieren, Formatvorlagen nutzen, ein Inhaltsverzeichnis erstellen und Kopf- und Fußzeile mit Seitenzahl einfügen.", { size: 20 })],
+      { spacing: { before: 80, after: 160 }, border: { bottom: { style: BorderStyle.SINGLE, size: 8, color: ACCENT, space: 6 } } }),
+    new Table({ width: { size: W, type: WidthType.DXA }, columnWidths: cw, rows: [
+      new TableRow({ tableHeader: true, children: ["Nr.", "Zeit", "Schritt", "Stichpunkte", "Wer", "Material"].map((h, i) => hc(h, cw[i])) }),
+      row("0", "vorher", "Vorbereitung des Arbeitsplatzes", ["Raum lüften, Tische und Stühle stellen", "PCs, Beamer und Word testen", "Übungsdatei auf allen PCs öffnen", "Aufgabenblätter, Handouts, Feedbackbögen, Bescheinigungen bereitlegen"], "Beide", "Checkliste", LB),
+      row("1", "Min. 0–2", "Begrüßung (2 Min.)", ["Freundlich begrüßen, Danke fürs Kommen", "Uns kurz vorstellen: Team „Die Allrounder“"], "Yannik", "–"),
+      row("2", "Min. 2–5", "Vorstellung des Themas und der Planung (3 Min.)", ["Thema und Ziel nennen", "Ablauf zeigen (Beamer)", "Frage an die Gruppe: Wer hat schon mal ein Referat in Word gemacht?", "Eigene Fragen sammeln"], "Yannik", "Beamer, Schulungsblatt S. 1", LB),
+      row("3a", "Min. 5–11", "Durchführung: Vorführen (6 Min.)", ["Formate und Formatvorlagen live zeigen (Nico, 2 Min.)", "Inhaltsverzeichnis automatisch erstellen (Yannik, 2 Min.)", "Kopf-/Fußzeile und Seitenzahl (Nico, 1 Min.)", "Eigene Vorlage als .dotx speichern (Yannik, 1 Min.)", "Zwischendurch Verständnisfragen stellen"], "Nico und Yannik", "Beamer, Übungsdatei"),
+      row("3b", "Min. 11–16", "Durchführung: Selbst üben (5 Min.)", ["Gruppen (3–5) üben am PC", "Fußball-Übungsdatei + Aufgabenblatt (Aufgaben 1–5, Rest als Bonus)", "Wir gehen herum und helfen", "Am Ende: wichtigste Punkte kurz zusammenfassen"], "Beide", "PCs, Übungsdatei, Aufgabenblatt", LB),
+      row("4", "Min. 16–17", "Bereitstellung des Handouts (1 Min.)", ["Handout erst jetzt austeilen (nicht vorher, sonst Ablenkung)", "Kurz zeigen: alles zum Nachschlagen"], "Nico", "Handout"),
+      row("5", "Min. 17–19", "Feedback-Fragebogen ausfüllen lassen (2 Min.)", ["Bogen austeilen, anonym ausfüllen", "Bögen wieder einsammeln"], "Beide", "Feedbackbogen", LB),
+      row("6", "Min. 19–20", "Verabschiedung (1 Min.)", ["Teilnahmebescheinigungen übergeben", "Danke sagen und verabschieden"], "Yannik", "Bescheinigungen"),
+    ] }),
+    P([r("Gesamtdauer: 20 Minuten", { bold: true, color: NAVY, size: 22 })], { alignment: AlignmentType.RIGHT, spacing: { before: 120 } }),
+  ];
+  await save("Schulungskonzept_DieAllrounder", [sec("Schulungskonzept", konzept)]);
+}
 
 // =========================== 05 FEEDBACK ===========================
 const fw = [4406, 1160, 1160, 1160, 1160, 1160];
