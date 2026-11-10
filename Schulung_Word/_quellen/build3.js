@@ -273,14 +273,6 @@ await save("04_Aufgaben_Fussball", [sec("Aufgaben", [
   const LB = "F6F8FB";
   const meta = (k, v) => P([r(k + ": ", { bold: true, color: NAVY, size: 20 }), r(v, { size: 20 })], { spacing: { after: 20 } });
   const konzept = [
-    P([r("SCHULUNGSKONZEPT", { bold: true, color: ACCENT, size: 20 })], { spacing: { after: 20 } }),
-    P([r("Word-Schulung: Formate, Inhaltsverzeichnis, Kopf- und Fußzeile", { bold: true, color: NAVY, size: 32 })], { spacing: { after: 100 } }),
-    new Table({ width: { size: W, type: WidthType.DXA }, columnWidths: [W / 2, W / 2], rows: [new TableRow({ children: [
-      new TableCell({ width: { size: W / 2, type: WidthType.DXA }, borders: nb, children: [meta("Team", "„Die Allrounder“ (Nico und Yannik)"), meta("Zielgruppe", "Schülerinnen und Schüler der Mittelstufe"), meta("Gruppen", "3–5 Personen pro PC")] }),
-      new TableCell({ width: { size: W / 2, type: WidthType.DXA }, borders: nb, children: [meta("Termin", "Dienstag, 17.11.2026"), meta("Ort", "Raum 0.68"), meta("Dauer", "20 Minuten (Begrüßung bis Verabschiedung)")] }),
-    ] })] }),
-    P([r("Ziel: ", { bold: true, color: NAVY, size: 20 }), r("Die Teilnehmenden können Text formatieren, Formatvorlagen nutzen, ein Inhaltsverzeichnis erstellen und Kopf- und Fußzeile mit Seitenzahl einfügen.", { size: 20 })],
-      { spacing: { before: 80, after: 160 }, border: { bottom: { style: BorderStyle.SINGLE, size: 8, color: ACCENT, space: 6 } } }),
     new Table({ width: { size: W, type: WidthType.DXA }, columnWidths: cw, rows: [
       new TableRow({ tableHeader: true, children: ["Nr.", "Zeit", "Schritt", "Stichpunkte", "Wer", "Material"].map((h, i) => hc(h, cw[i])) }),
       row("0", "vorher", "Vorbereitung des Arbeitsplatzes", ["Raum lüften, Tische und Stühle stellen", "PCs, Beamer und Word testen", "Übungsdatei auf allen PCs öffnen", "Aufgabenblätter, Handouts, Feedbackbögen, Bescheinigungen bereitlegen"], "Beide", "Checkliste", LB),
@@ -292,7 +284,6 @@ await save("04_Aufgaben_Fussball", [sec("Aufgaben", [
       row("5", "Min. 17–19", "Feedback-Fragebogen ausfüllen lassen (2 Min.)", ["Bogen austeilen, anonym ausfüllen", "Bögen wieder einsammeln"], "Beide", "Feedbackbogen", LB),
       row("6", "Min. 19–20", "Verabschiedung (1 Min.)", ["Teilnahmebescheinigungen übergeben", "Danke sagen und verabschieden"], "Yannik", "Bescheinigungen"),
     ] }),
-    P([r("Gesamtdauer: 20 Minuten", { bold: true, color: NAVY, size: 22 })], { alignment: AlignmentType.RIGHT, spacing: { before: 120 } }),
   ];
   await save("Schulungskonzept_DieAllrounder", [sec("Schulungskonzept", konzept)]);
 }
