@@ -170,15 +170,19 @@ await save("02_Schulungsblatt", [sec("Schulungsblatt", [
   pb(),
 
   H1("Jetzt seid ihr dran"),
-  P([r("Öffnet die Datei ", { size: 24 }), r("04_Uebungsdatei_Steckbrief", { bold: true, size: 24 }), r(". Ihr habt 25 Minuten. Arbeitet in Gruppen (3–5 Personen) und hakt ab:", { size: 24 })]),
-  check("„Mein Steckbrief“ bekommt die Vorlage „Titel“."),
-  check("Über mich, Hobbys, Traumberuf bekommen „Überschrift 1“."),
+  P([r("Öffnet die Datei ", { size: 24 }), r("04_Uebungsdatei_Fussball", { bold: true, size: 24 }), r(". Ihr habt 25 Minuten. Arbeitet in Gruppen (3–5 Personen) und hakt ab:", { size: 24 })]),
+  check("Den Titel „Fußball – mehr als nur ein Spiel“ mit der Vorlage „Titel“ formatieren."),
+  check("Die 8 Hauptkapitel (Einleitung bis Fazit) bekommen „Überschrift 1“."),
+  check("Die Unterkapitel (z. B. „Die Anfänge“, „Abseits“) bekommen „Überschrift 2“."),
+  check("Die Einleitung in Blocksatz setzen und „beliebteste Sportart der Welt“ fett machen."),
+  check("Die 4 Rekorde unter „Zahlen und Rekorde“ als Aufzählung mit Punkten formatieren."),
   check("„Überschrift 1“ ändern: eine neue Farbe."),
-  check("In der Gliederung „Traumberuf“ nach oben schieben."),
+  check("In der Gliederung „Fußball in Deutschland“ vor „Die großen Turniere“ schieben."),
   check("Nach dem Titel: Strg + Enter, Inhaltsverzeichnis, wieder Strg + Enter."),
   check("Kopfzeile: euren Namen eintragen. Fußzeile: Seitenzahl."),
   check("„Erste Seite anders“ anhaken."),
   check("Als Word-Vorlage (.dotx) speichern."),
+  P([r("Schnell fertig? Bonus: „Zahlen und Rekorde“ auf eine eigene Seite im Querformat setzen.", { italics: true, color: GREY, size: 22 })], { spacing: { before: 120 } }),
   H2("So soll es am Ende aussehen"),
   img("ziel", 600),
   pb(),
@@ -229,10 +233,8 @@ await save("03_Handout", [sec("Handout", [
 
 // =========================== 04 ÜBUNGSDATEI ===========================
 const plain = (t) => new Paragraph({ children: [new TextRun(t)] });
-await save("04_Uebungsdatei_Steckbrief", [{ properties: { page }, headers: { default: new Header({ children: [new Paragraph({ children: [new TextRun("Übungsdatei – Team „Die Allrounder“")] })] }) }, children: [
-  "Mein Steckbrief", "Über mich", "Ich heiße … und bin … Jahre alt. Ich gehe in die Klasse … .",
-  "Hobbys", "In meiner Freizeit mache ich gerne … .", "Traumberuf", "Später möchte ich … werden, weil … .",
-].map(plain) }]);
+await save("04_Uebungsdatei_Fussball", [{ properties: { page }, headers: { default: new Header({ children: [new Paragraph({ children: [new TextRun("Übungsdatei – Team „Die Allrounder“")] })] }) },
+  children: require("./fussball_text.js").map(plain) }]);
 
 // =========================== 05 FEEDBACK ===========================
 const fw = [4406, 1160, 1160, 1160, 1160, 1160];
@@ -277,7 +279,7 @@ await save("00_Ablaufplan_intern", [sec("Ablaufplan (intern)", [
     ["09:40 (15 min)", "Inhaltsverzeichnis", "Gliederung zeigen, Inhaltsverzeichnis einfügen und aktualisieren", "Yannik"],
     ["09:55 (10 min)", "Seiten, Kopf und Fuß", "Kopf-/Fußzeile, Seitenzahl, Abschnitt mit Querformat", "Nico"],
     ["10:05 (5 min)", "Eigene Vorlage", "Als .dotx speichern und neu öffnen", "Yannik"],
-    ["10:10 (25 min)", "Üben", "Steckbrief in Gruppen (3–5), wir helfen", "Beide"],
+    ["10:10 (25 min)", "Üben", "Fußball-Text in Gruppen (3–5), wir helfen", "Beide"],
     ["10:35 (10 min)", "Quiz und Ende", "Quiz, Handout, Feedback, Bescheinigung", "Beide"],
   ], { boldFirst: true }),
   H1("Checkliste"),
