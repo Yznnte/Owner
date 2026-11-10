@@ -236,6 +236,28 @@ const plain = (t) => new Paragraph({ children: [new TextRun(t)] });
 await save("04_Uebungsdatei_Fussball", [{ properties: { page }, headers: { default: new Header({ children: [new Paragraph({ children: [new TextRun("Übungsdatei – Team „Die Allrounder“")] })] }) },
   children: require("./fussball_text.js").map(plain) }]);
 
+// =========================== 04b AUFGABENBLATT ===========================
+const task = (title, hint) => new Paragraph({ numbering: { reference: "chk", level: 0 }, keepLines: true, spacing: { after: 150 },
+  children: [r(title, { size: 25 }), ...(hint ? [new TextRun({ break: 1 }), r(hint, { size: 20, color: GREY })] : [])] });
+await save("04_Aufgaben_Fussball", [sec("Aufgaben", [
+  P([r("Aufgaben zur Übungsdatei", { bold: true, color: NAVY, size: 40 })], { spacing: { after: 60 } }),
+  P([r("Öffnet die Datei „04_Uebungsdatei_Fussball“ und erledigt die Aufgaben der Reihe nach. Hakt ab, was ihr geschafft habt.", { size: 23 })], { spacing: { after: 240 },
+    border: { bottom: { style: BorderStyle.SINGLE, size: 8, color: ACCENT, space: 6 } } }),
+  task("Formatiert den Titel „Fußball – mehr als nur ein Spiel“ mit der Vorlage „Titel“.", "Start › Formatvorlagen › Titel"),
+  task("Gebt den 8 Hauptkapiteln (von „Einleitung“ bis „Fazit“) die Vorlage „Überschrift 1“.", "Start › Formatvorlagen › Überschrift 1"),
+  task("Gebt den Unterkapiteln (z. B. „Die Anfänge“, „Abseits“) die Vorlage „Überschrift 2“.", "Start › Formatvorlagen › Überschrift 2"),
+  task("Setzt die Einleitung in Blocksatz und macht „beliebteste Sportart der Welt“ fett.", "Start › Absatz › Blocksatz  ·  Start › F"),
+  task("Formatiert die 4 Rekorde unter „Zahlen und Rekorde“ als Aufzählung mit Punkten.", "Start › Absatz › Aufzählungszeichen"),
+  task("Ändert die Vorlage „Überschrift 1“ in eine neue Farbe.", "Rechtsklick auf „Überschrift 1“ › Ändern …"),
+  task("Schiebt in der Gliederung „Fußball in Deutschland“ vor „Die großen Turniere“.", "Ansicht › Gliederung › ▲"),
+  task("Fügt nach dem Titel eine neue Seite mit einem Inhaltsverzeichnis ein. Danach wieder eine neue Seite.", "Strg + Enter  ·  Referenzen › Inhaltsverzeichnis"),
+  task("Schreibt euren Namen in die Kopfzeile und fügt unten eine Seitenzahl ein.", "Doppelklick in den Rand  ·  Einfügen › Seitenzahl › Seitenende"),
+  task("Sorgt dafür, dass das Deckblatt keine Kopf- und Fußzeile hat.", "Kopf- und Fußzeile › Erste Seite anders"),
+  task("Speichert eure Datei als Word-Vorlage.", "Datei › Speichern unter › Word-Vorlage (*.dotx)"),
+  box([[r("Bonus: ", { bold: true, size: 23 }), r("Setzt das Kapitel „Zahlen und Rekorde“ auf eine eigene Seite im Querformat.", { size: 23 })],
+       [r("Layout › Umbrüche › Nächste Seite  ·  Layout › Ausrichtung › Querformat", { size: 20, color: GREY })]]),
+])]);
+
 // =========================== 05 FEEDBACK ===========================
 const fw = [4406, 1160, 1160, 1160, 1160, 1160];
 const fq = ["Die Schulung war gut organisiert.", "Alles wurde verständlich erklärt.", "Das Tempo war passend.", "Die Übungen am PC haben geholfen.", "Ich kann jetzt Formatvorlagen nutzen.", "Ich kann jetzt Kopf- und Fußzeile einfügen."];
